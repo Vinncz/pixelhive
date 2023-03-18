@@ -1,0 +1,23 @@
+.popupEl {
+    transition: all var(--transitionSpeed) ease-in-out;
+    cursor: pointer;
+}
+  
+.popupEl:hover {
+    transform: translate(-0.4rem, -0.4rem);
+    box-shadow: 0.4rem 0.4rem 0 var(--border-color);
+}
+
+@media (prefers-reduced-motion) {
+    .popupEl {
+        transition: all calc(var(--transitionSpeed) - 0.05s) ease-in-out;
+        cursor: pointer;
+    }
+    
+    .popupEl:hover {
+        box-sizing: unset;
+        transform: none;
+        border: 1px solid var(--soft);
+        box-shadow: none;
+    }
+}
