@@ -1,18 +1,11 @@
 @import url('./css/spacings.css');
-@import url('./css/font-sizes.css');
+@import url('./css/fonts.css');
 @import url('./css/positioning.css');
 @import url('./css/borders.css');
 @import url('./css/buttons.css');
+@import url('./css/colors.css');
 
 :root {
-    --font-mono: ui-monospace, 'JetBrains Mono', Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-                'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-                'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-    --tColor: #242424;
-    --html-background: #f5f5f5;
-    --border-color: #dddddd;
-    --light: #ffffff;
-    --soft: #9f9f9f;
     --pagePadding: 30px;
     --transitionSpeed: 0.15s;
 }
@@ -30,41 +23,17 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-@font-face {
-    font-family: 'Satoshi';
-    src: url(../fonts/Satoshi/Fonts/WEB/fonts/Satoshi-Variable.woff2);
-}
-
-@font-face {
-    font-family: 'Satoshi Italic';
-    src: url(../fonts/Satoshi/Fonts/WEB/fonts/Satoshi-VariableItalic.woff2);
-}
-
 html,
 body {
     min-height: 100vh;
     position: relative;
     background: var(--html-background);
     color: var(--tColor);
-    
 }
 
 a {
     color: inherit;
     text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --html-background: #121212;
-        --tColor: #dfdfdf;
-        --border-color: #3a3a3a;
-        --light: #393939;
-    }
-    
-    html {
-        color-scheme: dark;
-    }
 }
 
 main {
@@ -130,6 +99,11 @@ main {
     flex-direction: row;
 }
 
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .fullH {
     height: 100%;
 }
@@ -177,5 +151,11 @@ main {
     
     .visibleWhenHoveredAffectedComponent {
         transition: none;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .grid2 {
+        grid-template-columns: 1fr;
     }
 }

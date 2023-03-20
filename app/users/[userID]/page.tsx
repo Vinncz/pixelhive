@@ -32,8 +32,10 @@ export default async function userPage({params: {userID}}: Params) {
             <div className='em2 martom30'> {user.name} </div>
             
             <Suspense fallback={ <h2> Loading.. </h2> }>
-                { /* @ts-expect-error Server Component */ }
-                <UserPosts promise={userPostsData} />
+                <div className='borrad5 grid2 gap25 verti'>
+                    { /* @ts-expect-error Server Component */ }
+                    <UserPosts promise={userPostsData} />
+                </div>
             </Suspense>
         </>
     )

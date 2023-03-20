@@ -5,9 +5,9 @@ import Head from 'next/head';
 
 export default function NavBar () {
     return (
-        <div id='navbar' className="flex fullW r pagePadding centerVerti spaceBetweenH padtop15 padtom15 marleft-5"> 
-            <div className="flex r centerVerti gap15">
-                <svg width="30" height="30" viewBox="0 0 40 40" className='marri15' fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div id='navbar' className="flex fullW r pagePadding centerVerti spaceBetweenH padtop15 padtom15 marleft-5 z1"> 
+            <div className="flex r centerVerti gap5">
+                <svg width="25" height="25" viewBox="0 0 40 40" className='marri15' fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_85_1600)">
                         <rect x="3" y="3" width="10" height="10" rx="2" className="textColored"/>
                         <rect x="15" y="3" width="10" height="10" rx="2" className="textColored"/>
@@ -35,8 +35,20 @@ export default function NavBar () {
                         </clipPath>
                     </defs>
                 </svg>
-                <Link href='/' className='em1_5'>
-                    PixelHive 
+                <Link href='/' className='em1_5 b'>
+                    PixelHive™
+                </Link>
+            </div>
+            <div className="flex marri-10 gap10">
+                <Link href='/'>
+                    <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                        Sign In
+                    </div>
+                </Link>
+                <Link href='/'>
+                    <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                        Register
+                    </div>
                 </Link>
             </div>
         </div>

@@ -11,6 +11,7 @@ export const metadata = {
         initialScale: 1,
         maximumScale: 1,
     },
+    icons: '../public/vercel.svg'
 }
 
 export default function RootLayout({

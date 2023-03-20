@@ -1,6 +1,5 @@
 .popupEl {
     transition: all var(--transitionSpeed) ease-in-out;
-    cursor: pointer;
 }
   
 .popupEl:hover {
@@ -8,10 +7,14 @@
     box-shadow: 0.4rem 0.4rem 0 var(--border-color);
 }
 
+.coloredEl:hover {
+    background: var(--themeColor);
+    color: white
+}
+
 @media (prefers-reduced-motion) {
     .popupEl {
         transition: all calc(var(--transitionSpeed) - 0.05s) ease-in-out;
-        cursor: pointer;
     }
     
     .popupEl:hover {

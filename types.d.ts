@@ -20,16 +20,21 @@ type User = {
       "catchPhrase": string,
       "bs": string
     }
-}
+};
 
 type Post = {
     "userID": number,
     "id": number,
     "title": string,
     "body": string
-}
+};
 
-type Category = {
-    "id": number,
-    "name": string
-}
+type ProductTag = {
+    "tag_id": number,
+    "tag_name": string
+};
+
+type Product = {
+    "product_id": number,
+    "product_name": string
+};

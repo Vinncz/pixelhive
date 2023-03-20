@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import './page.module.css'
-import getAllCategory from '@/lib/getAllCategory'
+import Tags from './tag/components/Tags'
 import Link from 'next/link'
 
-export default async function Home () {
-    const userData: Promise<User[]> = getAllCategory()
-    const users = await userData
-    
+import dns from 'node:dns';
+import { Suspense } from 'react';
+dns.setDefaultResultOrder('ipv4first');
+
+export default async function Home () {    
     const Home = (
         <>
             <style dangerouslySetInnerHTML={{__html: `#navspanButton { display: none; }`,}}/>
@@ -15,18 +16,11 @@ export default async function Home () {
                 All Categories
             </div>
 
-            <div className="fullH fullW flex verti gap25 martom30">
-                {users.map(user => {
-                    return (
-                        <>
-                            <Link key={user.id} href={`/users/${user.id}`}>
-                                <div className='popupEl pad30 boxedEl1 borrad5'>
-                                    {user.name} 
-                                </div>
-                            </Link>
-                        </>
-                    )
-                })}
+            <div className="fullH fullW grid2 verti gap25 martom30">
+                <Suspense fallback={ <div className='fullH fullW r verti flex'> Fetching tags.. </div> }> { /* <-- will be replaced later */ }
+                    { /* @ts-expect-error Server Component */ }
+                    <Tags/>
+                </Suspense>
             </div>
         </>
     )

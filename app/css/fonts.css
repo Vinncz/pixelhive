@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Satoshi';
+    src: url(../../fonts/Satoshi/Fonts/WEB/fonts/Satoshi-Variable.woff2);
+}
+
+@font-face {
+    font-family: 'Satoshi Italic';
+    src: url(../../fonts/Satoshi/Fonts/WEB/fonts/Satoshi-VariableItalic.woff2);
+}
+
+:root {
+    --font-mono: ui-monospace, 'JetBrains Mono', Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+}
+
+.b {
+    font-weight: 700;
+}
+
+.sb {
+    font-weight: 900;
+}
+
+.em_75 {
+    font-size: 0.75em;
+}
+
+.em1 {
+    font-size: 1em;
+}
+
+.em1_5 {
+    font-size: 1.5em;
+}
+
+.em2 {
+    font-size: 2em;
+}
