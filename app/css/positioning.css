@@ -1,9 +1,25 @@
+.leftHori {
+    justify-content: flex-start;
+}
+
 .centerHori {
     justify-content: center;
 }
 
+.rightHori {
+    justify-content: flex-end;
+}
+
+.upperVerti {
+    align-items: flex-start;
+}
+
 .centerVerti {
     align-items: center;
+}
+
+.bottomVerti {
+    align-items: flex-end;
 }
 
 .spaceAroundH {

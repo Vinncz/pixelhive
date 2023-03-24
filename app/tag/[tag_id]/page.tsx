@@ -3,7 +3,9 @@ import PageTitle from '../../components/PageTitle';
 import getSpecifiedTag from '@/lib/getSpecifiedTag'
 import LoadingTemplate from '@/app/loaders/loading-template';
 import Products from './components/ProductsSection';
+import { CardCount } from './components/ProductsSection';
 import './page.module.css'
+
 
 type Params = {
     params: {
@@ -13,18 +15,19 @@ type Params = {
 
 export default async function page({params:{tag_id}}: Params) {
     
-    const returnedData: Promise<TagData[]> = getSpecifiedTag(tag_id)
+    const returnedData: Promise<TagData> = getSpecifiedTag(tag_id)
     const datas = await returnedData
+    const cardCount = CardCount()
+    console.log("card count: " + cardCount)
     
     const page = (
         <>
-            <PageTitle title={datas.data.tag_name}  />
+            <PageTitle title={datas.tag_name}  />
             
             <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                <div className="fullH fullW r autoGrid verti gap25 martom30">
+                
                     { /* @ts-expect-error Server Component */ }
-                    <Products tag_id={datas.data.tag_id} />
-                </div>
+                    <Products tag_id={datas.tag_id} />
             </Suspense>
         </>
     );

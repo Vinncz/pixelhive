@@ -31,12 +31,32 @@
     font-weight: 900;
 }
 
+.semib {
+    font-weight: 600;
+}
+
 .em_75 {
     font-size: 0.75em;
 }
 
 .em1 {
     font-size: 1em;
+}
+
+.em1_05 {
+    font-size: 1.05em;
+}
+
+.em1_1 {
+    font-size: 1.10em;
+}
+
+.em1_15 {
+    font-size: 1.15em;
+}
+
+.em1_25 {
+    font-size: 1.25em;
 }
 
 .em1_5 {

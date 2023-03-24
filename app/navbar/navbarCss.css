@@ -1,6 +1,7 @@
 #navbar {
     border-bottom: 1px solid var(--border-color);
-    background: var(--themeColor);
+    /* background: var(--themeColor); */
+    background: var(--html-background);
     position: sticky;
     top: 0;
     height: 55px;

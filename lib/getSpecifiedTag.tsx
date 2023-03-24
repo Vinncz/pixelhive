@@ -7,7 +7,7 @@ export default async function getSpecifiedTag (tag_id:string) {
     console.log(`http://localhost:8000/api/tags/${tag_id}`)
     
     const res = await fetch (`http://localhost:8000/api/tags/${tag_id}`).then(response => response.json()).then(datas => {
-        data = datas
+        data = datas.data
         console.log("\nHasil yang diterima GetSpecifiedTag:\n" + JSON.stringify(datas))
     });
     
