@@ -3,8 +3,13 @@
     --html-background: #f5f5f5;
     --border-color: #c6c6c6;
     --light: #ffffff;
-    --soft: #9f9f9f;
+    --soft: rgb(159, 159, 159);
     --themeColor: #8560e4;
+    --lighterSoft: rgb(181, 181, 181);
+}
+
+.softBg {
+    background: var(--soft);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +19,8 @@
         --border-color: #3a3a3a;
         --light: #393939;
         --themeColor: #5b37b7;
+        --soft: rgba(38, 37, 47, 1);
+        --lighterSoft: rgb(49, 48, 57);
     }
     
     html {

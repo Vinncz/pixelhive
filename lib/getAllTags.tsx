@@ -1,11 +1,12 @@
 import React from 'react'
 
 export default async function getAllTags () {
-    var data = null
+    var returnValue = null
     const res = await fetch ('http://localhost:8000/api/tags').then(response => response.json()).then(datas => {
-        data = datas.data
+        returnValue = datas.data
+        console.log("\nHasil yang diterima sama getALL TAGS :\n" + JSON.stringify(datas))
     });
     
-    if (!data) throw new Error('Failed to fetch tags.')
-    return data
+    if (!returnValue) throw new Error('Failed to fetch tags.')
+    return returnValue
 }

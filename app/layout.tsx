@@ -24,7 +24,7 @@ export default function RootLayout({
             <body className='gap15 r verti'>
                 <NavBar></NavBar>
                     <main className="flex hori fullH fullW r centerHori martom30">
-                        <div id='pageWrapper' className="flex verti fullH r gap5">
+                        <div id='pageWrapper' className="flex verti r gap5">
                             <NavSpan></NavSpan>
                             
                             {children}

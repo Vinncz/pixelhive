@@ -29,12 +29,43 @@ type Post = {
     "body": string
 };
 
-type ProductTag = {
-    "tag_id": number,
-    "tag_name": string
+type TagData = {
+    'tag_id': number,
+    'tag_name': string,
+    'dataToo' ?: GroupData[]
+};
+
+type GroupData = {
+    'group_id': number,
+    'group_name': string,
+    'product': ProductData[]
+};
+
+type ProductData = {
+    'product_id': number,
+    'product_name': string,
+    'product_desc': string,
+    'merchant_id': number,
+    'product_price': number,
+    'product_status': string,
+    'created_at': string,
+    'group_id': number
+};
+
+type ProductGroup = {
+    "group_id": number,
+    "product_tags_id": number,
+    "product_id": number,
+    "product_name": string
 };
 
 type Product = {
     "product_id": number,
-    "product_name": string
-};
+    "product_name": string,
+    "product_desc": string,
+    "merchant_id": number,
+    "product_price": number,
+    "product_status": string,
+    "created_at": string,
+    "group_id": number
+}

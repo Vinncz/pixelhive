@@ -1,10 +1,11 @@
-import Image from 'next/image'
 import './page.module.css'
 import Tags from './tag/components/Tags'
-import Link from 'next/link'
+import LoadingTemplate from './loaders/loading-template'
+import PageTitle from './components/PageTitle'
 
 import dns from 'node:dns';
 import { Suspense } from 'react';
+
 dns.setDefaultResultOrder('ipv4first');
 
 export default async function Home () {    
@@ -12,16 +13,14 @@ export default async function Home () {
         <>
             <style dangerouslySetInnerHTML={{__html: `#navspanButton { display: none; }`,}}/>
             
-            <div className='fullW flex em2 martom30'> 
-                All Categories
-            </div>
-
-            <div className="fullH fullW grid2 verti gap25 martom30">
-                <Suspense fallback={ <div className='fullH fullW r verti flex'> Fetching tags.. </div> }> { /* <-- will be replaced later */ }
+            <PageTitle title='All Categories' />
+            
+            <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
+                <div className="fullH fullW r grid2 verti gap25 martom30">
                     { /* @ts-expect-error Server Component */ }
                     <Tags/>
-                </Suspense>
-            </div>
+                </div>
+            </Suspense>
         </>
     )
     

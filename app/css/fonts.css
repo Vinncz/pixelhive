@@ -12,6 +12,15 @@
     --font-mono: ui-monospace, 'JetBrains Mono', Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+    --font-default: 'Satoshi', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    font-family: var(--font-default);
+}
+
+.code {
+    font-family: var(--font-mono);
 }
 
 .b {
