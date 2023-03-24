@@ -104,6 +104,16 @@ main {
     grid-template-columns: 1fr 1fr;
 }
 
+.grid3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
 .fullH {
     height: 100%;
 }
