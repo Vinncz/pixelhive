@@ -35,6 +35,18 @@
     font-weight: 600;
 }
 
+.em_4 {
+    font-size: 0.4em;
+}
+
+.em_5 {
+    font-size: 0.5em;
+}
+
+.em_6 {
+    font-size: 0.6em;
+}
+
 .em_75 {
     font-size: 0.75em;
 }
@@ -65,4 +77,8 @@
 
 .em2 {
     font-size: 2em;
+}
+
+.opacity_5 {
+    opacity: 0.5;
 }

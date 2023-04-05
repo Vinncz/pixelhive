@@ -25,9 +25,8 @@ export default async function page({params:{tag_id}}: Params) {
             <PageTitle title={datas.tag_name}  />
             
             <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                
-                    { /* @ts-expect-error Server Component */ }
-                    <Products tag_id={datas.tag_id} />
+                { /* @ts-expect-error Server Component */ }
+                <Products tag_id={datas.tag_id} />
             </Suspense>
         </>
     );

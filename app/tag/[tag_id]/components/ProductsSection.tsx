@@ -16,7 +16,7 @@ export default async function ProductsSection (passedTag : TagData) {
         const returnPage = data.map(card => {
             return (
                 <>
-                    <Link className='popupEl r hideOverflow gap10 boxedEl1 borrad10 productCard fullW fullH' href={`./product/${card.product.map(id => {return id.product_id})}`}>
+                    <Link className='popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH' href={`../product/${card.product.map(id => {return id.product_id.toString()})}`}>
                         <div className="productCardImg r grid hideOverflow">
                             <img decoding='async' src="https://images.unsplash.com/photo-1551925608-7ae602b0def0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="" />
                         </div>

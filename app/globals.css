@@ -4,6 +4,7 @@
 @import url('./css/borders.css');
 @import url('./css/buttons.css');
 @import url('./css/colors.css');
+@import url('./css/productPage.css');
 
 :root {
     --pagePadding: 30px;

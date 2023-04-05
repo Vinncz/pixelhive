@@ -43,6 +43,7 @@ type GroupData = {
 
 type ProductData = {
     'product_id': number,
+    "product_image": string,
     'product_name': string,
     'product_desc': string,
     'merchant_id': number,
@@ -59,8 +60,14 @@ type ProductGroup = {
     "product_name": string
 };
 
+type Merchant = {
+    "merchant_id": number,
+    "merchant_name": string
+}
+
 type Product = {
     "product_id": number,
+    "product_image": string,
     "product_name": string,
     "product_desc": string,
     "merchant_id": number,

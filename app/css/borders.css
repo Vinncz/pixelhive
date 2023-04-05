@@ -1,3 +1,15 @@
+.borleft1 {
+    border-left: 1px solid var(--border-color);
+}
+
+.bortom1 {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bortop1 {
+    border-top: 1px solid var(--border-color);
+}
+
 .boxedEl1 {
     border: 1px solid var(--border-color);
 }
@@ -24,6 +36,18 @@
 
 .borrad15 {
     border-radius: 15px;
+}
+
+.borrad20 {
+    border-radius: 20px;
+}
+
+.borrad25 {
+    border-radius: 25px;
+}
+
+.borradMAX {
+    border-radius: 1080px;
 }
 
 .nobor {
