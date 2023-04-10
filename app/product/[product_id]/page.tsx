@@ -1,8 +1,8 @@
 import getSpecifiedProduct from '@/lib/getSpecifiedProduct'
-import ProductImage from './components/ProductImage'
-import ProductBody from './components/ProductBody'
 import React, { Suspense } from 'react'
-import LoadingTemplate from '@/app/loaders/loading-template'
+import LoadingProduct from '@/app/loaders/loading-product'
+import getMerchant from '@/lib/getMerchant'
+import ProductPage from './components/ProductPage'
 
 type Params = {
     params: {
@@ -15,20 +15,18 @@ export default async function page ({params:{product_id}}: Params) {
     const returnedData: Promise<ProductData> = getSpecifiedProduct(product_id)
     const data = await returnedData
     
+    // const productImages: Promise<ProductImage[]> = getProductImages(product_id)
+    // const images = await productImages
+    const images = "placeholder.png"
+    
+    const merchant: Promise<Merchant> = getMerchant(data.merchant_id);
+    const associated_merchant = await merchant
+    
     const page = (
         <>
-            <div id="productPage" className="borrad5 fullW fullH">
-                
-                <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                    { /* @ts-expect-error Server Component */ }
-                    <ProductImage imgname={data.product_image} />
-                </Suspense>
-                
-                <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                    { /* @ts-expect-error Server Component */ }
-                    <ProductBody data={data}/>
-                </Suspense>
-            </div>
+            <Suspense fallback={<LoadingProduct/>}>
+                <ProductPage data={data} associated_merchant={associated_merchant} images={images} />
+            </Suspense>
         </>
     )
     

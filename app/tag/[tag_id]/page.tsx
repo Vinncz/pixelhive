@@ -5,6 +5,7 @@ import LoadingTemplate from '@/app/loaders/loading-template';
 import Products from './components/ProductsSection';
 import { CardCount } from './components/ProductsSection';
 import './page.module.css'
+import LoadingProductCards from '@/app/loaders/loading-product-cards';
 
 
 type Params = {
@@ -24,12 +25,20 @@ export default async function page({params:{tag_id}}: Params) {
         <>
             <PageTitle title={datas.tag_name}  />
             
-            <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
+            <Suspense fallback={<LoadingProductCards/>}>
                 { /* @ts-expect-error Server Component */ }
                 <Products tag_id={datas.tag_id} />
             </Suspense>
         </>
     );
+    
+    const temp = (
+        <>
+            <PageTitle title={datas.tag_name}  />
+            
+            <LoadingProductCards/>
+        </>
+    )
     
     return page;
 }

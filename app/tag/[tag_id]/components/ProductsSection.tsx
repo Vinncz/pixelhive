@@ -1,8 +1,8 @@
 import getProductFromTag from '@/lib/getProductFromTag'
 import Link from 'next/link'
 import React from 'react'
-import TruncateString from '../scripts/TruncateString';
-import FormatCurrency from '../scripts/FormatCurrency';
+import TruncateString from '../../../scripts/TruncateString';
+import FormatCurrency from '../../../scripts/FormatCurrency';
 
 var elementCount = 0;
 

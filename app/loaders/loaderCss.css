@@ -1,7 +1,49 @@
-#loading-bar {
+.loading-bar {
     /* background: rgb(181,181,181); */
     background: linear-gradient(90deg, rgba(181, 181, 181, 0) 0%, var(--lighterSoft) 25%, rgba(159,159,159,0) 75%);
-    animation: loading 1s infinite;
+    animation: loading 1.15s infinite ease-in-out;
+}
+
+.tiny-loader-container {
+    width: 150px;
+}
+
+.short-loader-container {
+    width: 250px;
+}
+
+.medium-loader-container {
+    width: 450px;
+}
+
+.tiny-round {
+    height: 15px;
+    width: 15px;
+}
+
+.tiny {
+    height: 15px;
+}
+
+.short-round {
+    height: 20px;
+    width: 20px;
+}
+
+.short {
+    height: 20px;
+}
+
+.product-page-image {
+    grid-area: image;
+}
+
+.productCardTall {
+    height: 335px;
+}
+
+.productCardContainerTall {
+    height: 720px;
 }
 
 @keyframes loading {

@@ -41,6 +41,35 @@ type GroupData = {
     'product': ProductData[]
 };
 
+type Tag = {
+    'tag_id': number,
+    'tag_name': string,
+}
+type Group = {
+    'group_id': number,
+    'group_name': string
+}
+type Product = {
+    'product_id': number,
+    'product_name': string,
+    'product_desc': string,
+    'merchant_id': number,
+    'product_price': number,
+    'product_status': string,
+    'created_at': string,
+    'group_id': number
+}
+type Merchant = {
+    "merchant_id": number,
+    "merchant_name": string,
+    "merchant_image": string
+}
+type User = {
+    "user_id": number,
+    "username": string,
+    "user_image": string
+}
+
 type ProductData = {
     'product_id': number,
     "product_image": string,
@@ -62,17 +91,6 @@ type ProductGroup = {
 
 type Merchant = {
     "merchant_id": number,
-    "merchant_name": string
-}
-
-type Product = {
-    "product_id": number,
-    "product_image": string,
-    "product_name": string,
-    "product_desc": string,
-    "merchant_id": number,
-    "product_price": number,
-    "product_status": string,
-    "created_at": string,
-    "group_id": number
+    "merchant_name": string,
+    "merchant_image": string
 }
