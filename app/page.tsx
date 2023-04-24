@@ -8,13 +8,13 @@ import { Suspense } from 'react';
 
 dns.setDefaultResultOrder('ipv4first');
 
-export default async function Home () {    
+export default async function Home () {
     const Home = (
         <>
             <style dangerouslySetInnerHTML={{__html: `#navspanButton { display: none; }`,}}/>
-            
+
             <PageTitle title='All Categories' />
-            
+
             <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
                 <div className="fullH fullW r gridH2 verti gap25 martom30">
                     { /* @ts-expect-error Server Component */ }
@@ -23,6 +23,6 @@ export default async function Home () {
             </Suspense>
         </>
     )
-    
+
     return Home
 }

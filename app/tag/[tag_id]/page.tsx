@@ -1,11 +1,8 @@
 import React, { Suspense, use } from 'react'
 import PageTitle from '../../components/PageTitle';
-import getSpecifiedTag from '@/lib/getSpecifiedTag'
-import LoadingTemplate from '@/app/loaders/loading-template';
 import Products from './components/ProductsSection';
-import { CardCount } from './components/ProductsSection';
-import './page.module.css'
 import LoadingProductCards from '@/app/loaders/loading-product-cards';
+import show_tag from '@/lib/fetch/show/show_tag';
 
 
 type Params = {
@@ -15,30 +12,29 @@ type Params = {
 }
 
 export default async function page({params:{tag_id}}: Params) {
-    
-    const returnedData: Promise<TagData> = getSpecifiedTag(tag_id)
-    const datas = await returnedData
-    const cardCount = CardCount()
-    console.log("card count: " + cardCount)
-    
+
+    const tag_data_call: Promise<Tag> = show_tag(tag_id)
+    const tag_data = await tag_data_call
+
+
     const page = (
         <>
-            <PageTitle title={datas.tag_name}  />
-            
+            <PageTitle title={tag_data.tag_name}  />
+
             <Suspense fallback={<LoadingProductCards/>}>
                 { /* @ts-expect-error Server Component */ }
-                <Products tag_id={datas.tag_id} />
+                <Products tag_id={tag_data.tag_id} />
             </Suspense>
         </>
     );
-    
+
     const temp = (
         <>
-            <PageTitle title={datas.tag_name}  />
-            
+            <PageTitle title={tag_data.tag_name}  />
+
             <LoadingProductCards/>
         </>
     )
-    
+
     return page;
 }

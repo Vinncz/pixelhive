@@ -1,23 +1,23 @@
-import getAssociatedProductFromGroup from '@/lib/getAssociatedProductFromGroup'
 import FormatCurrency from '@/app/scripts/FormatCurrency'
 import React from 'react'
+import index_products_by_group from '@/lib/fetch/index/index_products_by_group'
 
 type Param = {
-    group_id: number,
+    group_id: string,
     current_product_id: number
 }
 
 export default async function ProductVariantItem({group_id, current_product_id}: Param) {
-    const data: Promise<ProductData[]> = await getAssociatedProductFromGroup(group_id)
+    const data: Promise<ProductData[]> = await index_products_by_group(group_id)
     const associatedProduct = await data
-    
+
     var classes = "ptr productVariantItem pad15 centerHori "
-    
+
     const content = associatedProduct.map(item => {
         var thisclasses = classes
         if (item.product_id == current_product_id)
             thisclasses += "selected"
-            
+
         return (
             <a href={'./' + item.product_id} className={thisclasses}>
                 <span className='flex fullW spaceBetweenH em_6 opacity_5'>
@@ -31,6 +31,6 @@ export default async function ProductVariantItem({group_id, current_product_id}:
             </a>
         )
     })
-    
+
     return content
 }

@@ -83,10 +83,8 @@ type ProductData = {
 };
 
 type ProductGroup = {
-    "group_id": number,
+    "product_group_id": number,
     "product_tags_id": number,
-    "product_id": number,
-    "product_name": string
 };
 
 type Merchant = {
