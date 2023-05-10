@@ -57,7 +57,16 @@ type Product = {
     'product_price': number,
     'product_status': string,
     'created_at': string,
-    'group_id': number
+    'group_id': number,
+    'image': ProductImage[]
+}
+type ProductImage = {
+    "image_id": number,
+    "product_id": number,
+    "image_type": string,
+    "image_location": string,
+    "created_at": string,
+    "updated_at": string
 }
 type Merchant = {
     "merchant_id": number,
@@ -72,7 +81,7 @@ type User = {
 
 type ProductData = {
     'product_id': number,
-    "product_image": string,
+    "product_image": ProductImage[],
     'product_name': string,
     'product_desc': string,
     'merchant_id': number,
@@ -81,6 +90,7 @@ type ProductData = {
     'created_at': string,
     'group_id': number
 };
+
 
 type ProductGroup = {
     "product_group_id": number,
