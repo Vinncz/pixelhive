@@ -13,16 +13,16 @@ type Params = {
 
 export default async function page ({params:{product_id}}: Params) {
 
-    const product_data_call: Promise<ProductData> = show_product(product_id)
-    const product_data = await product_data_call
+    const PROMISE_product_data: Promise<Product> = show_product(product_id)
+    const OBJECT_product_data = await PROMISE_product_data
 
-    const merchant_data_call: Promise<Merchant> = show_merchant(product_data.merchant_id.toString());
-    const merchant_data = await merchant_data_call
+    const PROMISE_merchant_data: Promise<Merchant> = show_merchant(OBJECT_product_data.merchant_id.toString());
+    const OBJECT_merchant_data = await PROMISE_merchant_data
 
     const page = (
         <>
             <Suspense fallback={<LoadingProduct/>}>
-                <ProductPage product_data={product_data} merchant_data={merchant_data} />
+                <ProductPage product_data={OBJECT_product_data} merchant_data={OBJECT_merchant_data} />
             </Suspense>
         </>
     )

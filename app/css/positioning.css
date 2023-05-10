@@ -1,3 +1,7 @@
+.center {
+    place-content: center;
+}
+
 .leftHori {
     justify-content: flex-start;
 }

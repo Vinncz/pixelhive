@@ -84,6 +84,10 @@ main {
     display: flex;
 }
 
+.flex-imp {
+    display: flex !important;
+}
+
 .verti {
     display: flex;
     flex-direction: column;
@@ -208,11 +212,11 @@ main {
     * {
         transition: none;
     }
-    
+
     .visibleWhenHovered {
         transition: none;
     }
-    
+
     .visibleWhenHoveredAffectedComponent {
         transition: none;
     }

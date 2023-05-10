@@ -1,6 +1,7 @@
 import LoadingTemplate from '@/app/loaders/loading-template'
 import React, { Suspense } from 'react'
 import ProductVariantItem from './ProductVariantItem'
+import ProductImageSwiper from './ProductImageSwiper'
 
 type Param = {
     product_data:any,
@@ -11,11 +12,11 @@ export default function ProductPage({product_data, merchant_data}:Param) {
     return (
         <div id="productPage" className="borrad5 fullW fullH">
 
-            <div id="productImage">
-                <img decoding='async' src={'../../../assets/images/'} alt="product image" />
-            </div>
+            <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
+                <ProductImageSwiper product_id={product_data.product_id}/>
+            </Suspense>
 
-            <div id="productBody" className='bortop1'>
+            <div id="productBody" className='bortop1 fullH'>
                 <div id="productContent">
                     <div className='bortom1 em1_5 pad15 padleft25' id="productName">
                         {product_data.product_name}

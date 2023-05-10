@@ -1,11 +1,10 @@
 #productPage {
-    display: grid;
-    grid-template-areas: 
+    /* display: grid;
+    grid-template-areas:
         "image"
-        "image"
-        "image"
-        "image"
-        "body";
+        "body"; */
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--border-color);
 }
 
@@ -16,7 +15,7 @@
 #productPage #productBody {
     grid-area: body;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "content content content actions";
 }
 
@@ -45,4 +44,8 @@
 
 #productPage #productBody #productActions #productVariantSelector .productVariantItem:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
+}
+
+.swiper-slide, .swiper-wrapper {
+    height: 320px !important;
 }
