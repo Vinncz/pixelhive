@@ -3,6 +3,9 @@
 In consideration:
 - Separate interface (page) for merchant and customer. Referring to ASP.NET, where you can set the appropriate element visible/invisible based on the authorization level of a end-user, which therefore only results in one page in ASP.NET.
 
+Update:
+- It looks like it is simpler to make seperate page for each role.
+
 In progress:
 - Merchant dashboard interface
 
