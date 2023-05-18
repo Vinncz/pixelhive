@@ -17,13 +17,77 @@ export default function page() {
                 </div>
             </div>
 
-            <div className="r flex verti fullH bortom gap10" id="merchant_product">
+            <div className="r flex verti bortom gap15 bortom1 padtom30 padtop30" id="merchant_product">
                 <div className="em1_25 b">
                     Your Products
                 </div>
 
-                <div className="r flex" id="merchant_product_scroller">
-                    a
+                {
+                    /*
+                     * There is the need to make a CARD ELEMENT that takes in images, name, and price.
+                     * Might make it in the next commit or two.
+                     *
+                     * For the time being, due to time constraint, merchant page will be focused to be able to insert + view only.
+                     * Update and delete operations may come later.
+                     */
+                }
+
+                <div className="r flex gap15" id="merchant_product_scroller">
+                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
+                        href="../../../product/1">
+                        <div className="productCardImg r grid hideOverflow">
+                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
+                        </div>
+
+                        <div className="productCardDetails pad15 gap10 flex r verti">
+                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
+                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
+                        </div>
+                    </a>
+                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
+                        href="../../../product/1">
+                        <div className="productCardImg r grid hideOverflow">
+                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
+                        </div>
+
+                        <div className="productCardDetails pad15 gap10 flex r verti">
+                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
+                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
+                        </div>
+                    </a>
+                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
+                        href="../../../product/1">
+                        <div className="productCardImg r grid hideOverflow">
+                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
+                        </div>
+
+                        <div className="productCardDetails pad15 gap10 flex r verti">
+                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
+                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
+                        </div>
+                    </a>
+                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
+                        href="../../../product/1">
+                        <div className="productCardImg r grid hideOverflow">
+                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
+                        </div>
+
+                        <div className="productCardDetails pad15 gap10 flex r verti">
+                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
+                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
+                        </div>
+                    </a>
+                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
+                        href="../../../product/1">
+                        <div className="productCardImg r grid hideOverflow">
+                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
+                        </div>
+
+                        <div className="productCardDetails pad15 gap10 flex r verti">
+                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
+                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </>
