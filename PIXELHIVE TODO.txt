@@ -1,0 +1,13 @@
+TO DO:
+
+bikin auth di PixelHive
+  bikin login page
+  bikin regist page
+
+bikin tampilan utk merchant
+bikin tampilan utk checkout
+
+bikin adisi supaya merchant bisa post product (masukin product, pilih tag, pilih variant, buat variant, dll.)
+bikin adisi supaya merchant bisa hapus product
+bikin adisi supaya merchant bisa update product (gambarnya hrs bisa update)
+
