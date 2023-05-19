@@ -1,0 +1,15 @@
+#transaction {
+    background: rgb(148 93 255);
+}
+
+.white {
+    color: white;
+}
+
+#revenue {
+    background: #2fc580;
+}
+
+.minWidth {
+    min-width: 250px;
+}

@@ -1,4 +1,6 @@
 import React from 'react'
+import ProductCard from '../components/ProductCard'
+import './page.css'
 
 export default function page() {
     return (
@@ -17,77 +19,41 @@ export default function page() {
                 </div>
             </div>
 
-            <div className="r flex verti bortom gap15 bortom1 padtom30 padtop30" id="merchant_product">
+            {
+                /*
+                    * For the time being, due to time constraint, merchant page will be focused to be able to insert + view only.
+                    * Update and delete operations may come later.
+                 */
+            }
+
+            <div className="r flex verti bortom gap15 padtom30 bortom1">
+                <div className="em1_25 b">
+                    Shop Status
+                </div>
+
+                <div className="flex hori gap15 borrad5 dynamic_scroller">
+                    <div className="flex fullW fullH pad25 borrad5 verti gap15 minWidth" id="transaction">
+                        <span className='noSelect white'>Total Transactions</span>
+                        <h2 className='white'> 14 Successful Transactions </h2>
+                    </div>
+                    <div className="flex fullW fullH pad25 borrad5 verti gap15 minWidth" id="revenue">
+                        <span className='noSelect white'>Total Revenue</span>
+                        <h2 className='white'> Rp.3.999.999,- </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div className="r flex verti gap15 padtom30 padtop30 martop15" id="merchant_product">
                 <div className="em1_25 b">
                     Your Products
                 </div>
 
-                {
-                    /*
-                     * There is the need to make a CARD ELEMENT that takes in images, name, and price.
-                     * Might make it in the next commit or two.
-                     *
-                     * For the time being, due to time constraint, merchant page will be focused to be able to insert + view only.
-                     * Update and delete operations may come later.
-                     */
-                }
-
-                <div className="r flex gap15" id="merchant_product_scroller">
-                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
-                        href="../../../product/1">
-                        <div className="productCardImg r grid hideOverflow">
-                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
-                        </div>
-
-                        <div className="productCardDetails pad15 gap10 flex r verti">
-                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
-                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
-                        </div>
-                    </a>
-                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
-                        href="../../../product/1">
-                        <div className="productCardImg r grid hideOverflow">
-                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
-                        </div>
-
-                        <div className="productCardDetails pad15 gap10 flex r verti">
-                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
-                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
-                        </div>
-                    </a>
-                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
-                        href="../../../product/1">
-                        <div className="productCardImg r grid hideOverflow">
-                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
-                        </div>
-
-                        <div className="productCardDetails pad15 gap10 flex r verti">
-                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
-                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
-                        </div>
-                    </a>
-                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
-                        href="../../../product/1">
-                        <div className="productCardImg r grid hideOverflow">
-                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
-                        </div>
-
-                        <div className="productCardDetails pad15 gap10 flex r verti">
-                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
-                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
-                        </div>
-                    </a>
-                    <a className="popupEl r hideOverflow gap10 boxedEl1 borrad5 productCard fullW fullH"
-                        href="../../../product/1">
-                        <div className="productCardImg r grid hideOverflow">
-                            <img decoding="async" src="http://localhost:8000/storage/https://picsum.photos/200/300" alt="" />
-                        </div>
-
-                        <div className="productCardDetails pad15 gap10 flex r verti">
-                            <div className="productCardTitle em1_05 bottomVerti">Brush Pack for ProCreate</div>
-                            <div className="grid productCardPrice em1_15 martom5 b centerVerti">Rp.299.999,- </div>
-                        </div>
-                    </a>
+                <div className="padtop10 padtom10 padleft10" id="merchant_product_scroller">
+                    <ProductCard image_src='' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard image_src='' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard price={255}></ProductCard>
+                    <ProductCard price={255}></ProductCard>
                 </div>
             </div>
         </>

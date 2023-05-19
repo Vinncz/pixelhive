@@ -122,6 +122,27 @@ main {
     grid-template-columns: repeat(4, 1fr);
 }
 
+.noSelect {
+    user-select: none;
+}
+
+
+.dynamic_scroller {
+    overflow-x: auto;
+    scroll-snap-align: snap;
+}
+
+#merchant_product_scroller {
+    display: flex;
+    position: relative;
+    gap: 15px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+
+
 .productCard {
     height:auto;
 }
