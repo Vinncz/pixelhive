@@ -122,6 +122,9 @@
 
 
 /* Margins below */
+.marginAUTO {
+    margin: auto;
+}
 
 .mar5 {
     margin: 5px;
