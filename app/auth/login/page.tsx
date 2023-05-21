@@ -83,7 +83,7 @@ export default function page() {
                 </div>
 
                 <div>
-                    {error && <p>{error}</p>}
+                    {error && <p style={{color: "red", padding: "10px"}}>{error}</p>}
                 </div>
 
                 <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>
