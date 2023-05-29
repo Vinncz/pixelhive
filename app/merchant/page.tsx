@@ -14,7 +14,7 @@ export default function page() {
                         The ProCreate-sinator
                     </div>
                     <div className="r flex em_1" id="merchant_operational_hour">
-                        O8:00 - 17:00
+                        Bandung City
                     </div>
                 </div>
             </div>
@@ -49,11 +49,11 @@ export default function page() {
                 </div>
 
                 <div className="padtop10 padtom10 padleft10" id="merchant_product_scroller">
-                    <ProductCard image_src='' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
-                    <ProductCard image_src='' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
-                    <ProductCard price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
-                    <ProductCard price={255}></ProductCard>
-                    <ProductCard price={255}></ProductCard>
+                    <ProductCard image_src='https://picsum.photos/200/300' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard image_src='https://picsum.photos/200/200' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard image_src='https://picsum.photos/200/400' price={255} name='Digital Photography of a Dog in a Shower'></ProductCard>
+                    <ProductCard image_src='https://picsum.photos/200/200' price={255}></ProductCard>
+                    <ProductCard image_src='https://picsum.photos/200/300' price={255}></ProductCard>
                 </div>
             </div>
         </>
