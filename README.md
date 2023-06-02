@@ -3,6 +3,12 @@
 In progress:
 - Register as user page
 - Register as merchant page
+- Add new product page
+  - Add new product image
+  - Add product variant
+  - Delete product image
+  - Delete product variant
+- Delete product funtionality
 
 Need improvements:
 - Login page's css
