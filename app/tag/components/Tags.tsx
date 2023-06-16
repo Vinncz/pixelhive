@@ -5,7 +5,7 @@ import React from 'react'
 export default async function Tags () {
     const data: Promise<TagData[]> = index_tags()
     const tags = await data
-
+    console.log(tags);
     const content = tags.map(tag => {
         return (
             <>

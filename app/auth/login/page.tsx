@@ -1,46 +1,55 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState, useEffect } from 'react'
+import cookie from 'cookie';
 
 export default function page() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('');
+    const setCookie = (name: any, value: any, options = {}) => {
+        const serializedCookie = cookie.serialize(name, value, options);
+        document.cookie = serializedCookie;
+    };
 
     const handleSubmit = async (event: FormEvent<HTMLElement>) => {
         event.preventDefault();
 
         if (!username || !password) {
-          setError('Username and password are required!');
-          return;
+            setError('Username and password are required!');
+            return;
         }
 
         if (username.trim().length <= 0) {
-          setError('Username cannot be all whitespace!');
-          return;
+            setError('Username cannot be all whitespace!');
+            return;
         }
 
         if (password.trim().length <= 0) {
-          setError('Password cannot be all whitespace!');
-          return;
+            setError('Password cannot be all whitespace!');
+            return;
         }
 
-        console.log("JSON STRINGIFY " + JSON.stringify({ username, password }))
+        var formdata = new FormData();
+        formdata.append("username", username);
+        formdata.append("password", password);
 
-        const response = await fetch('http://localhost:8000/api/auth/login?username=' + username + '&password=' + password, {
-            method: 'GET',
-            credentials: 'include',
+        const response = await fetch('http://localhost:8000/api/auth/login', {
+            method: 'POST',
+            body: formdata,
+            credentials: 'include'
         });
+
         const data = await response.json();
 
         try {
             if (response.ok) {
-                const authCookie = response.headers.get('auth-cookie');
-
-                document.cookie = authCookie ? authCookie : "";
-
-                console.log('debug:', data.message);
+                setCookie('jwt', data.access_token, {
+                    maxAge: 3600,
+                    path: '/',
+                    sameSite: 'lax',
+                });
                 setError('');
 
                 window.location.href = '/';
@@ -60,7 +69,7 @@ export default function page() {
         }
     };
 
-    const page =  (
+    const page = (
         <div className='gridH2'>
             {/* <PageTitle title='Login' /> */}
 
@@ -70,20 +79,20 @@ export default function page() {
                 <div className="flex verti gap10">
                     Username
                     <input className='pad10 borrad5'
-                           type="text" name="username" id="username"
-                           value={username}
-                           onChange={(event) => setUsername(event.target.value)} />
+                        type="text" name="username" id="username"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)} />
                 </div>
                 <div className="flex verti gap10">
                     Password
                     <input className='pad10 borrad5'
-                           type="text" name="password" id="password"
-                           value={password}
-                           onChange={(event) => setPassword(event.target.value)} />
+                        type="password" name="password" id="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)} />
                 </div>
 
                 <div>
-                    {error && <p style={{color: "red", padding: "10px"}}>{error}</p>}
+                    {error && <p style={{ color: "red", padding: "10px" }}>{error}</p>}
                 </div>
 
                 <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>

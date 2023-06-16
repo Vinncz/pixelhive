@@ -13,7 +13,7 @@ export default async function fetcher(scope: string, function_caller_name: strin
     try {
         console.log(`\n${function_caller_name} called [${address + scope}] and recieved the following:`)
         return await fetch (address + scope).then(response => response.json()).then(datas => {
-            console.log(JSON.stringify(datas) + '\n')
+            // console.log(JSON.stringify(datas) + '\n')
             return datas.data
         })
 

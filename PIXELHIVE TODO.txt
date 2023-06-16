@@ -11,3 +11,5 @@ bikin adisi supaya merchant bisa post product (masukin product, pilih tag, pilih
 bikin adisi supaya merchant bisa hapus product
 bikin adisi supaya merchant bisa update product (gambarnya hrs bisa update)
 
+harus login dlu baru bisa akses semua
+merchant + trans

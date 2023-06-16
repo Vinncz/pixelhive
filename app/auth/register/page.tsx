@@ -1,11 +1,16 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState, useEffect } from 'react'
+import cookie from 'cookie';
 
 export default function page() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('');
+    const setCookie = (name: any, value: any, options = {}) => {
+        const serializedCookie = cookie.serialize(name, value, options);
+        document.cookie = serializedCookie;
+    };
 
     const handleSubmit = async (event: FormEvent<HTMLElement>) => {
         event.preventDefault();
@@ -25,21 +30,24 @@ export default function page() {
           return;
         }
 
-        console.log("JSON STRINGIFY " + JSON.stringify({ username, password }))
+        var formdata = new FormData();
+        formdata.append("username", username);
+        formdata.append("password", password);
 
-        const response = await fetch('http://localhost:8000/api/auth/register?username=' + username + '&password=' + password, {
-            method: 'GET',
-            credentials: 'include',
+        const response = await fetch('http://localhost:8000/api/auth/register', {
+            method: 'POST',
+            body: formdata
         });
         const data = await response.json();
 
         try {
             if (response.ok) {
-                const authCookie = response.headers.get('auth-cookie');
+                setCookie('jwt', data.access_token, {
+                    maxAge: 3600,
+                    path: '/',
+                    sameSite: 'lax',
+                });
 
-                document.cookie = authCookie ? authCookie : "";
-
-                console.log('debug:', data.message);
                 setError('');
 
                 window.location.href = '/';
@@ -76,7 +84,7 @@ export default function page() {
                 <div className="flex verti gap10">
                     Password
                     <input className='pad10 borrad5'
-                           type="text" name="password" id="password"
+                           type="password" name="password" id="password"
                            value={password}
                            onChange={(event) => setPassword(event.target.value)} />
                 </div>
@@ -85,7 +93,7 @@ export default function page() {
                     {error && <p style={{color: "red", padding: "10px"}}>{error}</p>}
                 </div>
 
-                <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>
+                <button type='submit' className='greenButton pad15 borrad5 ptr'>Register</button>
             </form>
         </div>
     )
