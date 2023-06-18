@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
+import Cookies from "js-cookie";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,7 +17,7 @@ export default function ProductImageSwiper(props: ProductImageSwiperProps): JSX.
     const [images, setImages] = useState<ProductImage[]>([]);
 
     useEffect(() => {
-        index_product_image_by_product_id(props.product_id).then((result) => {
+        index_product_image_by_product_id(props.product_id, Cookies.get('jwt')).then((result) => {
             setImages(result);
         });
     }, [props.product_id]);

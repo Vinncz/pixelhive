@@ -4,6 +4,7 @@ import LoadingProduct from '@/app/loaders/loading-product'
 import ProductPage from './components/ProductPage'
 import show_product from '@/lib/fetch/show/show_product'
 import show_merchant from '@/lib/fetch/show/show_merchant'
+import Cookies from "js-cookie";
 
 type Params = {
     params: {
@@ -12,11 +13,10 @@ type Params = {
 }
 
 export default async function page ({params:{product_id}}: Params) {
-
-    const PROMISE_product_data: Promise<Product> = show_product(product_id)
+    const PROMISE_product_data: Promise<Product> = show_product(product_id, Cookies.get('jwt'))
     const OBJECT_product_data = await PROMISE_product_data
 
-    const PROMISE_merchant_data: Promise<Merchant> = show_merchant(OBJECT_product_data.merchant_id.toString());
+    const PROMISE_merchant_data: Promise<Merchant> = show_merchant(OBJECT_product_data.merchant_id.toString(), Cookies.get('jwt'));
     const OBJECT_merchant_data = await PROMISE_merchant_data
 
     const page = (

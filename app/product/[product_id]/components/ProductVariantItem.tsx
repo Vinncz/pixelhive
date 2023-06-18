@@ -1,6 +1,7 @@
 import FormatCurrency from '@/app/scripts/FormatCurrency'
 import React from 'react'
 import index_products_by_group from '@/lib/fetch/index/index_products_by_group'
+import Cookies from "js-cookie";
 
 type Param = {
     group_id: string,
@@ -8,7 +9,7 @@ type Param = {
 }
 
 export default async function ProductVariantItem({group_id, current_product_id}: Param) {
-    const data: Promise<ProductData[]> = await index_products_by_group(group_id)
+    const data: Promise<ProductData[]> = await index_products_by_group(group_id, Cookies.get('jwt'))
     const associatedProduct = await data
 
     var classes = "ptr productVariantItem pad15 centerHori "

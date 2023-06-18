@@ -17,7 +17,6 @@ export default async function Home () {
 
             <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
                 <div className="fullH fullW r gridH2 verti gap25 martom30">
-                    { /* @ts-expect-error Server Component */ }
                     <Tags/>
                 </div>
             </Suspense>

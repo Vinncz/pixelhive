@@ -4,24 +4,25 @@ import FormatCurrency from '../../../scripts/FormatCurrency';
 import index_products_by_group from '@/lib/fetch/index/index_products_by_group';
 import index_product_groups_by_tags from '@/lib/fetch/index/index_product_groups_by_tags';
 import index_product_image_by_product_id from '@/lib/fetch/index/index_product_image_by_product_id';
+import Cookies from "js-cookie";
 
 var elementCount = 0;
 
 export default async function ProductsSection (param: any) {
-    const product_groups: Promise<ProductGroup[]> = await index_product_groups_by_tags(param.tag_id)
+    const product_groups: Promise<ProductGroup[]> = await index_product_groups_by_tags(param.tag_id, Cookies.get('jwt'))
     const group_data = await product_groups;
 
     var page = null;
     if (group_data.length > 0) {
         const content = group_data.map(async group => {
-            const PROMISE_products: Promise<Product[]> = await index_products_by_group(group.product_group_id.toString())
+            const PROMISE_products: Promise<Product[]> = await index_products_by_group(group.product_group_id.toString(), Cookies.get('jwt'))
             const ARRAYoOBJECT_product_data = await PROMISE_products
 
             /* ambil produk pertama di setiap grup */
             if (ARRAYoOBJECT_product_data.length <= 0) return (<></>)
             const product = ARRAYoOBJECT_product_data[0]
 
-            const PROMISE_product_cover: Promise<ProductImage[]> = await index_product_image_by_product_id(product.product_id.toString())
+            const PROMISE_product_cover: Promise<ProductImage[]> = await index_product_image_by_product_id(product.product_id.toString(), Cookies.get('jwt'))
             const ARRAYoOBJECT_product_cover = await PROMISE_product_cover
             const product_cover = ARRAYoOBJECT_product_cover[0].image_location
 

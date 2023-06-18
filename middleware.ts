@@ -12,20 +12,6 @@ export default async function middleware(request: NextRequest) {
       if (request.nextUrl.pathname.startsWith('/auth')) {
          return NextResponse.rewrite(new URL('/', request.url))
       }
-      await validateUser();
-   }
-}
-
-async function validateUser() {
-   const response = await fetch('http://localhost:8000/api/auth/me', {
-      method: 'POST',
-      credentials: 'include'
-   })
-   if (response.ok) {
-      const data = await response.json()
-      console.log('User:', data) // Handle the user data as needed
-   } else {
-      console.log('Error:', response.statusText) // Handle the error as needed
    }
 }
 
