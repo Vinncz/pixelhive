@@ -1,13 +1,35 @@
 "use client"
 import PageTitle from '@/app/components/PageTitle'
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
 export default function page() {
 
+    const { push } = useRouter();
     const [inputs, setInputs] = useState(['']);
     const [images, setImages] = useState<File[]>([]);
     const [prices, setPrices] = useState<number[]>([0]);
     const [parentProductName, setParentProductName] = useState('');
+    const [tags, setTags] = useState(['']);
+    const [selectedTag, setSelectedTag] = useState<any>('');
+
+    useEffect(() => {
+        const getTags = async () => {
+            const response = await fetch('http://localhost:8000/api/tags', {
+                method: 'GET',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: 'include'
+            });
+            let responseData = await response.json();
+            let data = responseData.data;
+            setTags(data);
+            setSelectedTag(data[0].tag_id);
+        }
+        getTags()
+    }, [])
 
     const handleInputChange = (index: any, event: any) => {
         const newInputs = [...inputs];
@@ -55,7 +77,8 @@ export default function page() {
         const combinedData = {
             inputs: inputs.join(','),
             prices: prices.join(','),
-            parentProductName: parentProductName
+            parentProductName: parentProductName,
+            selectedTag: selectedTag
         };
 
         formdata.append('data', JSON.stringify(combinedData));
@@ -72,7 +95,9 @@ export default function page() {
         });
 
         const data = await response.json();
-        console.log(data);
+        if (response.ok) {
+           push('/merchant') 
+        }
     }
     return (
         <>
@@ -111,6 +136,20 @@ export default function page() {
                 </div>
             ))}
             <button onClick={handleAddInput} className='pad15 borrad5 boxedEl1 ptr martop10'>Add More</button>
+            <div className="martop25 flex verti gap15">
+                <span className='em1_25 noSelect'> Product Tags </span>
+                <select name="product" className='pad15 borrad5' id="prod" onChange={(e) => {
+                    setSelectedTag(e.target.value)
+                }}>
+                    {tags.length > 0 ? (
+                        tags.map((tag: any) => {
+                            return <option value={tag.tag_id}>{tag.tag_name}</option>;
+                        })
+                    ) : (
+                        <option value="1">test</option>
+                    )}
+                </select>
+            </div>
             <div className="flex verti gap15 martop15">
                 <div className="flex gap15 fullW">
                     <button className='fullW greenButton pad15 borrad5 ptr martop15' onClick={() => handleSubmit()}> Submit </button>

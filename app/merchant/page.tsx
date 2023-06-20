@@ -122,7 +122,7 @@ export default function page() {
                     {product.length > 0 ? (
                         <>
                             {product.map((product, index) => (
-                                <ProductCard image_src={'http://localhost:8000/storage/ProductImage/' + product.image[0]?.image_location} price={255} name={product.product_name} key={index}></ProductCard>
+                                <ProductCard image_src={'http://localhost:8000/storage/' + product.image[0]?.image_location} price={product.product_price} name={product.product_name} key={index} productGroup={product.group.group_id}></ProductCard>
                                 // <ProductCard image_src={product.image[0]?.image_location} price={255} name={product.product_name} key={index} productGroup={product.group.group_id}></ProductCard>
                                 // <h1>{product.group.group_id}</h1>
                             ))}

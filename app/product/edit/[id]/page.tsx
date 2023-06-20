@@ -1,15 +1,18 @@
 "use client"
 import PageTitle from '@/app/components/PageTitle'
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function page({ params: { id } }: any) {
-   console.log("id: " + id);
+   const { push } = useRouter();
    const [oldProductId, setOldProductId] = useState(['']);
    const [oldImages, setOldImages] = useState(['']);
    const [inputs, setInputs] = useState(['']);
    const [images, setImages] = useState<File[]>([]);
    const [prices, setPrices] = useState<number[]>([0]);
    const [parentProductName, setParentProductName] = useState('');
+   const [tags, setTags] = useState(['']);
+   const [selectedTag, setSelectedTag] = useState<any>('');
 
    useEffect(() => {
       const getProduct = async () => {
@@ -40,7 +43,41 @@ export default function page({ params: { id } }: any) {
          console.log(images);
          setOldImages(productImage);
       };
+
+      const getTags = async () => {
+         const response = await fetch('http://localhost:8000/api/tags', {
+            method: 'GET',
+            headers: {
+               "Accept": "application/json",
+               "Content-Type": "application/json"
+            },
+            credentials: 'include'
+         });
+         let responseData = await response.json();
+         let data = responseData.data;
+         setTags(data);
+         setSelectedTag(data[0].tag_id);
+      };
+
+      const getSelectedTags = async () => {
+         const response = await fetch('http://localhost:8000/api/tags/selected-tag/' + id, {
+            method: 'GET',
+            headers: {
+               "Accept": "application/json",
+               "Content-Type": "application/json"
+            },
+            credentials: 'include'
+         });
+         if (response.ok) {
+            let responseData = await response.json();
+            let data = responseData.data;
+            setSelectedTag(data.product_tags_id);
+         }
+      };
+
       getProduct();
+      getTags();
+      getSelectedTags();
    }, [])
 
 
@@ -101,15 +138,17 @@ export default function page({ params: { id } }: any) {
             oldProductId: oldProductId.join(','),
             inputs: inputs.join(','),
             prices: prices.join(','),
-            parentProductName: parentProductName
+            parentProductName: parentProductName,
+            selectedTag: selectedTag
          };
       }
       else {
          combinedData = {
             inputs: inputs.join(','),
             prices: prices.join(','),
-            parentProductName: parentProductName
-         }; 
+            parentProductName: parentProductName,
+            selectedTag: selectedTag
+         };
       }
 
       formdata.append('data', JSON.stringify(combinedData));
@@ -127,6 +166,9 @@ export default function page({ params: { id } }: any) {
       });
 
       const data = await response.json();
+      if (response.ok) {
+         push('/merchant')
+      }
    }
 
    const handleDeleteAll = async () => {
@@ -136,8 +178,8 @@ export default function page({ params: { id } }: any) {
          headers: {
             "Accept": "application/json",
          },
-      }); 
-      
+      });
+
       const data = await response.json();
       console.log(data);
    }
@@ -186,6 +228,20 @@ export default function page({ params: { id } }: any) {
             </div>
          ))}
          <button onClick={handleAddInput} className='pad15 borrad5 boxedEl1 ptr martop10'>Add More</button>
+         <div className="martop25 flex verti gap15">
+            <span className='em1_25 noSelect'> Product Tags </span>
+            <select name="product" className='pad15 borrad5' id="prod" onChange={(e) => {
+               setSelectedTag(e.target.value)
+            }}>
+               {tags.length > 0 ? (
+                  tags.map((tag: any) => {
+                     return <option value={tag.tag_id} selected={tag.tag_id === selectedTag}>{tag.tag_name}</option>;
+                  })
+               ) : (
+                  <option value="1">test</option>
+               )}
+            </select>
+         </div>
          <div className="flex verti gap15 martop15">
             <div className="flex gap15 fullW">
                <button className='fullW greenButton pad15 borrad5 ptr martop15' onClick={() => handleSubmit()}> Submit </button>
