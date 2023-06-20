@@ -22,7 +22,7 @@ export default function ProductPage({product_data, merchant_data}:Param) {
                         {product_data.product_name}
                     </div>
                     <div className='bortom1 pad15 padleft25 flex centerVerti gap15' id="merchant">
-                        <img className='boxedEl1 borradMAX' style={{maxWidth: 35 + 'px', maxHeight: 35 + 'px', aspectRatio: 1 / 1}} src={merchant_data.merchant_image ?? ''} alt="" />
+                        <img className='boxedEl1 borradMAX' style={{maxWidth: 35 + 'px', maxHeight: 35 + 'px', aspectRatio: 1 / 1}} src={'http://localhost:8000/storage/' + merchant_data.merchant_image ?? ''} alt="" />
                         {merchant_data.merchant_name}
                     </div>
                     <div className='pad15 padleft25 flex fullH' id="productDescription">

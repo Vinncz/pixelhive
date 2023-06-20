@@ -31,7 +31,7 @@ export default function NavBar() {
     }
 
     return (
-        <div id='navbar' className="flex fullW r pagePadding centerVerti spaceBetweenH padtop15 padtom15 z1">
+        <div id='navbar' className="flex fullW r pagePadding centerVerti spaceBetweenH padtop15 padtom15 zMAX">
             <div className="flex r centerVerti gap5 marleft-5">
                 {/* <svg width="25" height="25" viewBox="0 0 40 40" className='marri15' fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_85_1600)">
@@ -77,39 +77,50 @@ export default function NavBar() {
                     </Link>
                 </span>
             </div>
-            {!isLogin ? (
-                <div className="flex marri-10 gap10">
-                    <span id="sign-in-button">
-                        <Link href='/auth/login'>
+            <div className="flex marri-10 gap10">
+                {!isLogin ? (
+                    <>
+                        <span id="sign-in-button">
+                            <Link href='/auth/login'>
+                                <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                                    Sign In
+                                </div>
+                            </Link>
+                        </span>
+                        <span id="register-button">
+                            <Link href='/auth/register'>
+                                <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                                    Register
+                                </div>
+                            </Link>
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        <span>
+                            <Link href='/merchant'>
+                                <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                                    Merhant
+                                </div>
+                            </Link>
+                        </span>
+                        <span onClick={() => handleLogout()}>
                             <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
-                                Sign In
+                                Logout
                             </div>
-                        </Link>
-                    </span>
-                    <span id="register-button">
-                        <Link href='/auth/register'>
-                            <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
-                                Register
-                            </div>
-                        </Link>
-                    </span>
-                </div>
-            ) : (
-                <div className="flex marri-10 gap10">
-                    <span>
-                        <Link href='/merchant'>
-                            <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
-                                Merhant
-                            </div>
-                        </Link>
-                    </span>
-                    <span onClick={() => handleLogout()}>
+                        </span>
+                    </>
+                )}
+
+                <span>
+                    <Link href='/about'>
                         <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
-                            Logout
+                            About PixelHive
                         </div>
-                    </span>
-                </div>
-            )}
+                    </Link>
+                </span>
+
+            </div>
         </div>
     )
 }

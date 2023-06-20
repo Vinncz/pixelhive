@@ -1,6 +1,7 @@
 "use client"
 import PageTitle from '@/app/components/PageTitle'
 import { useRouter } from 'next/navigation';
+import router, { Router } from 'next/router';
 import React, { useEffect, useState } from 'react'
 
 export default function page({ params: { id } }: any) {
@@ -187,49 +188,9 @@ export default function page({ params: { id } }: any) {
    return (
       <>
          <PageTitle title='Edit Product' />
-         {inputs.length > 1 ? (
-            <div className="flex verti gap15">
-               <span className='em1_25 noSelect'>Product Parent Name</span>
-               <input type="text" className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
-            </div>
-         ) : null}
-         {inputs.length < 1 ? null : inputs.map((input, index) => (
-            <div key={index}>
-               <h3 className='martop15' style={{ color: 'teal' }}>Product {index + 1}</h3>
-               <div className="gridH2 gap30">
-                  <div className="flex verti gap15">
-                     <span className='em1_25 noSelect'> Product Name </span>
-                     <input type="text" className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handleInputChange(index, event)} value={input} />
-                  </div>
-                  <div className="flex verti gap15">
-                     <span className='em1_25 noSelect'> Product Price </span>
-                     <input type="number" className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
-                  </div>
-                  <div className="flex verti gap15">
-                     <span className='em1_25 noSelect'> Product Image </span>
-                     <input type="file" className='pad15 borrad5 boxedEl1 ptr' style={{ "outline": "none", display: "none" }} onChange={(event) => handleImageChange(index, event)} id={"img" + index} />
-                     <label htmlFor={"img" + index} style={{ padding: '1rem', backgroundColor: 'lightskyblue', color: 'white', borderRadius: '.2rem', textAlign: 'center' }}>Click me to upload image</label>
-                     {images[index] && <span>{images[index].name}</span>}
-                  </div>
-                  {inputs.length > 1 ? (
-                     <div className="flex verti gap15">
-                        <span className='em1_25 noSelect'> Remove This Product? </span>
-                        <button className='pad15 borrad5' onClick={() => handleRemoveInput(index)}>Remove</button>
-                     </div>
-                  ) : null}
-                  {oldImages.length >= 1 ? (
-                     <div className="flex verti gap15">
-                        <span className='em1_25 noSelect'> Previous Image </span>
-                        <img src={"http://localhost:8000/storage/" + oldImages[index]} alt="" style={{ maxHeight: '15rem' }} />
-                     </div>
-                  ) : null
-                  }
-               </div>
-            </div>
-         ))}
-         <button onClick={handleAddInput} className='pad15 borrad5 boxedEl1 ptr martop10'>Add More</button>
-         <div className="martop25 flex verti gap15">
-            <span className='em1_25 noSelect'> Product Tags </span>
+
+         <div className="flex verti gap15 martom30">
+            <span className='em1_25 noSelect'> Where Does Your Product Belong To? </span>
             <select name="product" className='pad15 borrad5' id="prod" onChange={(e) => {
                setSelectedTag(e.target.value)
             }}>
@@ -242,13 +203,82 @@ export default function page({ params: { id } }: any) {
                )}
             </select>
          </div>
-         <div className="flex verti gap15 martop15">
-            <div className="flex gap15 fullW">
-               <button className='fullW greenButton pad15 borrad5 ptr martop15' onClick={() => handleSubmit()}> Submit </button>
-               <button className='fullW orangeButton pad15 borrad5 ptr martop15'> Cancel </button>
+
+         {inputs.length > 1 ? (
+            <div className="flex verti gap15 martom30">
+               <span className='em1_25 noSelect'> What's the Name of this Aggregate? (Required) </span>
+               <input type="text" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
             </div>
-            <div className="flex gap15 fullW">
-               <button className='fullW redButton pad15 borrad5 ptr martop15' onClick={() => handleDeleteAll()}> Delete All </button>
+         ) : null}
+
+         {inputs.length < 1 ? null : inputs.map((input, index) => (
+            <div key={index} className='martom30'>
+               <div className='martop15 martom15 em1_5 b'>Product {index + 1} </div>
+               <div className="boxedEl1 pad30 borrad15">
+                  <div className='gridH2 gap30'>
+                     <div className="flex verti gap15">
+                        <span className='em1_15 noSelect'> Product Name (Required) </span>
+                        <input type="text" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => handleInputChange(index, event)} value={input} />
+                     </div>
+                     <div className="flex verti gap15">
+                        <span className='em1_15 noSelect'> Product Price (Required) </span>
+                        <input type="number" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
+                     </div>
+
+                     <div className="flex verti gap15">
+                        <span className='em1_15 noSelect'> Product Image
+                           {oldImages.length >= 1 && oldImages[index] ? (
+                              null
+                           ) : " (Required)"}
+                        </span>
+                        <input type="file" className='pad15 borrad5 boxedEl1 ptr' style={{ "outline": "none", display: "none" }} onChange={(event) => handleImageChange(index, event)} id={"img" + index} />
+                        <label className='b ptr greenOutlineButton pad15 borrad10 flex centerHori' htmlFor={"img" + index}> Select Image </label>
+                        {images[index] && <span style={{"opacity": "50%"}} className='flex fullH fullW boxedEl1 pad25 noSelect centerHori centerVerti borrad15'>{images[index].name === 'empty' ? 'No new image selected' : images[index].name === '' ? 'No image selected' : images[index].name}</span>}
+                     </div>
+
+                     {oldImages.length >= 1 ? (
+                        <div className="flex verti gap15">
+                           {oldImages[index] ? (
+                              <>
+                                 <span className='em1_15 noSelect'> Previous Image </span>
+                                 <div className='boxedEl1 hideOverflow borrad15 flex centerHori centerVerti' style={{"height": "250px"}}>
+                                    <img className='fullW fullH nobor' src={"http://localhost:8000/storage/" + oldImages[index]} alt="" style={{"objectFit": "cover", "outline": "none"}} />
+                                 </div>
+                              </>
+                           ) : null}
+                        </div>
+                     ) : null}
+                  </div>
+
+                  {inputs.length > 1 ? (
+                        <div className="flex verti gap5 martop30">
+                           <span className='em1_5 b code noSelect martop30'> Dangerous Zone </span>
+                           <span> Once taken, actions cannot be reverted. </span>
+                           <button className='pad15 borrad5 redOutlineButton ptr b martop15' onClick={() => handleRemoveInput(index)}>Remove</button>
+                        </div>
+                  ) : null}
+               </div>
+            </div>
+         ))}
+
+         <div className='flex verti gap15 martop30'>
+            <span className='b em1_25'> Do You Wish to Add a Variant of Your Item? </span>
+            <button onClick={handleAddInput} className='fullW orangeOutlineButton pad15 borrad5 ptr martop10 b'> Add Variant </button>
+         </div>
+
+         <div className="flex verti gap15">
+
+            <div className="flex gap15 fullW martom30">
+               <button className='fullW greenButton pad15 borrad5 ptr b martop15' onClick={() => handleSubmit()}> Update </button>
+               <button className='fullW redButton pad15 borrad5 ptr b martop15' onClick={() => {push("/merchant")}}> Cancel </button>
+            </div>
+
+            <div className="flex verti r martop30 gap10">
+               <span className='em1_5 b code noSelect'> Dangerous Zone </span>
+               <span> Once taken, actions cannot be reverted. </span>
+               <div className="flex gap15 fullW">
+                  <button className='fullW redOutlineButton pad15 borrad5 ptr b martop15' onClick={() => handleDeleteAll()}> Delete All </button>
+               </div>
             </div>
          </div>
       </>

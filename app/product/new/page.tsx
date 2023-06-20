@@ -85,6 +85,8 @@ export default function page() {
         for (let i = 0; i < images.length; i++) {
             formdata.append('images[]', images[i]);
         }
+
+        console.log(JSON.stringify(combinedData))
         const response = await fetch('http://localhost:8000/api/products/store-batch', {
             method: 'POST',
             body: formdata,
@@ -96,7 +98,7 @@ export default function page() {
 
         const data = await response.json();
         if (response.ok) {
-           push('/merchant') 
+           push('/merchant')
         }
     }
     return (

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // Make a request to your Laravel API to authenticate or perform other actions
     const response = await fetch('http://localhost:8000/api/auth/login', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'username': "Vinn",
             'password': "abc",

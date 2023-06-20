@@ -66,6 +66,10 @@
     z-index: 4;
 }
 
+.zMAX {
+    z-index: 9999;
+}
+
 .r {
     position: relative;
 }
