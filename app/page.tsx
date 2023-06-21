@@ -15,12 +15,12 @@ export default async function Home () {
             <style dangerouslySetInnerHTML={{__html: `#navspanButton { display: none; }`,}}/>
 
             <div id="heroBanner" className="r flex fullW borrad15 boxedEl1 pad30 martom30 hideOverflow centerHori centerVerti">
-                <div id="heroBannerBg" className='abs'></div>
+                <div id='heroBannerBg' className='abs' style={{"background": "linear-gradient(239deg, #70ddd8, #31c544)"}}></div>
 
                 <div className="flex verti fullW gap5 z2 padtop30 padtom30" style={{"justifyContent": "end", "height": "325px"}}>
                     <div className='em_75 b' style={{"color": "white", "opacity": "50%", "fontFamily": "Satoshi Italic"}}> #PixelHiveAlwaysAtHeart #PejuangOlshop </div>
-                    <div className="em2 sb" style={{"color": "white", "letterSpacing": "-0.5px"}}> Daftar jadi mitra PixelHive™ sekarang! </div>
-                    <a href="./merchant" className='padri30 padleft30 padtop10 padtom10 borradMAX marleft-5 martom15 martop10' style={{"width": "fit-content", "background": "#87336f", "color": "white"}}> Join now → </a>
+                    <div className="em2 b" style={{"color": "white", "letterSpacing": "-0.5px"}}> Daftar jadi mitra PixelHive™ sekarang! </div>
+                    <a href="./merchant" className='padri30 padleft30 padtop10 padtom10 borradMAX marleft-5 martom15 martop10' style={{"width": "fit-content", "background": "rgb(51 135 88)", "color": "white"}}> Join now → </a>
                 </div>
             </div>
 

@@ -223,7 +223,7 @@ export default function page({ params: { id } }: any) {
          {inputs.length > 1 ? (
             <div className="flex verti gap15 martom30">
                <span className='em1_25 noSelect'> What's the Name of this Aggregate? (Required) </span>
-               <input type="text" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
+               <input type="text" className='pad15 borrad5 boxedEl1' onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
             </div>
          ) : null}
 
@@ -234,15 +234,15 @@ export default function page({ params: { id } }: any) {
                   <div className='gridH2 gap30'>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Name (Required) </span>
-                        <input type="text" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => handleInputChange(index, event)} value={input} />
+                        <input type="text" className='pad15 borrad5 boxedEl1' onChange={(event) => handleInputChange(index, event)} value={input} />
                      </div>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Price (Required) </span>
-                        <input type="number" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
+                        <input type="number" className='pad15 borrad5 boxedEl1' onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
                      </div>
                      <div className="flex verti gap15">
-                        <span className='em1_25 noSelect'> Product Descriptions </span>
-                        <textarea className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
+                        <span className='em1_25 noSelect'> Product Description (Recommended) </span>
+                        <textarea className='pad15 borrad5 boxedEl1' style={{ "height": "200px", "resize": "vertical", "transition": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
                      </div>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Image

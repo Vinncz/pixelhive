@@ -13,7 +13,7 @@ export default function page() {
     const [product, setProduct] = useState<any[]>([])
     const [revenue, setRevenue] = useState(0)
     const [successfulTransaction, setSuccessfulTransaction] = useState(0)
-    
+
     useEffect(() => {
         const getProduct = async (data: { merchant: { merchant_id: string } }) => {
             const response = await fetch('http://localhost:8000/api/products/merchant-id/' + data.merchant.merchant_id, {
@@ -82,15 +82,15 @@ export default function page() {
     return (
         <>
             <div className="r pad25 boxedEl1 borrad10 flex gap25 martom30" id="merchant_info">
-                <div className="r boxedEl1 borradMAX flex centerHori centerVerti hideOverflow" id="merchant_picture">
-                    <img src={'http://localhost:8000/storage/' + merchantImage} alt="" style={{maxHeight: '4rem'}}/>
+                <div className="r boxedEl1 borradMAX flex centerHori centerVerti hideOverflow" id="merchant_picture" style={{height: '5rem', width: '5rem',}}>
+                    <img className='fullW fullH' src={'http://localhost:8000/storage/' + merchantImage} alt="" style={{aspectRatio: '1/1', objectFit: 'cover'}}/>
                 </div>
-                <div className="flex verti r centerHori gap10">
+                <div className="flex verti r centerHori gap10 padtop5 padtom5">
                     <div className="r flex em1_5 b" id="merchant_name">
                         {merchantName}
                     </div>
                     <div className="r flex em_1" id="merchant_operational_hour">
-                        Bandung City
+                        Kepulauan Indonesia
                     </div>
                 </div>
             </div>
@@ -102,11 +102,11 @@ export default function page() {
 
                 <div className="flex hori gap15 borrad5 dynamic_scroller">
                     <div className="flex fullW fullH pad25 borrad5 verti gap15 minWidth" id="transaction">
-                        <span className='noSelect white'>Total Transactions</span>
+                        <span className='noSelect white'> Your shop has served </span>
                         <h2 className='white'> {successfulTransaction} Successful Transactions </h2>
                     </div>
                     <div className="flex fullW fullH pad25 borrad5 verti gap15 minWidth" id="revenue">
-                        <span className='noSelect white'>Total Revenue</span>
+                        <span className='noSelect white'> With the total revenue of </span>
                         <h2 className='white'> Rp.{revenue},- </h2>
                     </div>
                 </div>
@@ -114,8 +114,8 @@ export default function page() {
 
             <div className="r flex verti gap15 padtom30 padtop30 martop15" id="merchant_product">
                 <div className="em1_25 b flex fullW" style={{justifyContent: 'space-between', alignItems: 'center'}}>
-                    <h4>Your Products</h4> 
-                    <Link href='/product/new' className='greenButton pad10 borrad10' style={{fontSize: '.8em'}}>Add Product</Link>
+                    <span className='em1'>Your Products</span>
+                    <Link href='/product/new' className='greenButton padleft30 padri30 padtop10 padtom10 borrad5 em_75'> Add Product </Link>
                 </div>
 
                 <div className="padtop10 padtom10 padleft10" id="merchant_product_scroller">

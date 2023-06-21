@@ -14,7 +14,7 @@ type Params = {
 export default async function page({params:{tag_id}}: Params) {
     const tag_data_call: Promise<Tag> = show_tag(tag_id, Cookies.get('jwt'))
     const tag_data = await tag_data_call
-    
+
 
 
     const page = (
