@@ -8,7 +8,7 @@ export default function page() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('');
+    const [errors, setError] = useState('');
     const setCookie = (name: any, value: any, options = {}) => {
         const serializedCookie = cookie.serialize(name, value, options);
         document.cookie = serializedCookie;
@@ -76,8 +76,8 @@ export default function page() {
 
             <div className='fullW fullH centerHori flex centerVerti martom30 padtom30'>
 
-                <form onSubmit={handleSubmit} className="flex r borrad5 pad30 boxedEl1 verti gap30" style={{"width": "500px"}}>
-                    <img src="https://video-public.canva.com/VAFAiJOBbnk/v/968cca7ada.gif" alt="" style={{"width": "50px", "marginBottom": "-10px"}} />
+                <form onSubmit={handleSubmit} className="flex r borrad10 pad30 boxedEl1 verti gap30" style={{"width": "500px"}}>
+                    <img src="https://video-public.canva.com/VAFAiJOBbnk/v/968cca7ada.gif" alt="" style={{"width": "50px", "marginBottom": "-15px"}} />
                     <span className='em1_5 r b'> Login to PixelHive™ </span>
 
                     <div className="flex verti gap10">
@@ -96,7 +96,7 @@ export default function page() {
                     </div>
 
                     <div>
-                        {error && <p style={{ color: "red", padding: "10px" }}>{error}</p>}
+                        {errors && <p style={{ color: "red", padding: "10px" }}>{errors}</p>}
                     </div>
 
                     <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>
