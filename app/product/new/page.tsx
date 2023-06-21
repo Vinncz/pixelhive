@@ -163,19 +163,6 @@ export default function page() {
                         <label className='b ptr greenOutlineButton pad15 borrad10 flex centerHori' htmlFor={"img" + index}> Select Image </label>
                         {images[index] && <span style={{"opacity": "50%"}} className='flex fullH fullW boxedEl1 pad25 noSelect centerHori centerVerti borrad15'>{images[index].name === 'empty' ? 'No new image selected' : images[index].name === '' || images[index].name === null ? 'No image selected' : images[index].name}</span>}
                      </div>
-
-                     {input.length >= 1 ? (
-                        <div className="flex verti gap15">
-                           {input[index] ? (
-                              <>
-                                 <span className='em1_15 noSelect'> Previous Image </span>
-                                 <div className='boxedEl1 hideOverflow borrad15 flex centerHori centerVerti' style={{"height": "250px"}}>
-                                    <img className='fullW fullH nobor' src={"http://localhost:8000/storage/" + input[index]} alt="" style={{"objectFit": "cover", "outline": "none"}} />
-                                 </div>
-                              </>
-                           ) : null}
-                        </div>
-                     ) : null}
                   </div>
 
                   {inputs.length > 1 ? (
