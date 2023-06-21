@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState, useEffect } from 'react'
 import cookie from 'cookie';
+import PageTitle from '@/app/components/PageTitle';
 
 export default function page() {
 
@@ -70,34 +71,38 @@ export default function page() {
     };
 
     const page = (
-        <div className='gridH2'>
+        <>
             {/* <PageTitle title='Login' /> */}
 
-            <form onSubmit={handleSubmit} className="fullW fullH flex r borrad5 pad30 boxedEl1 verti gap30">
-                <span className='em1_5 r b'> PixelHive™ </span>
+            <div className='fullW fullH centerHori flex centerVerti martom30 padtom30'>
 
-                <div className="flex verti gap10">
-                    Username
-                    <input className='pad10 borrad5'
-                        type="text" name="username" id="username"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)} />
-                </div>
-                <div className="flex verti gap10">
-                    Password
-                    <input className='pad10 borrad5'
-                        type="password" name="password" id="password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)} />
-                </div>
+                <form onSubmit={handleSubmit} className="flex r borrad5 pad30 boxedEl1 verti gap30" style={{"width": "500px"}}>
+                    <img src="https://video-public.canva.com/VAFAiJOBbnk/v/968cca7ada.gif" alt="" style={{"width": "50px", "marginBottom": "-10px"}} />
+                    <span className='em1_5 r b'> Login to PixelHive™ </span>
 
-                <div>
-                    {error && <p style={{ color: "red", padding: "10px" }}>{error}</p>}
-                </div>
+                    <div className="flex verti gap10">
+                        Username
+                        <input className='pad10 borrad5 boxedEl1'
+                            type="text" name="username" id="username"
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)} />
+                    </div>
+                    <div className="flex verti gap10">
+                        Password
+                        <input className='pad10 borrad5 boxedEl1'
+                            type="password" name="password" id="password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)} />
+                    </div>
 
-                <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>
-            </form>
-        </div>
+                    <div>
+                        {error && <p style={{ color: "red", padding: "10px" }}>{error}</p>}
+                    </div>
+
+                    <button type='submit' className='greenButton pad15 borrad5 ptr'> Log In </button>
+                </form>
+            </div>
+        </>
     )
 
     return page
