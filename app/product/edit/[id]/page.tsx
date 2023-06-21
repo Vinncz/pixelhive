@@ -11,6 +11,7 @@ export default function page({ params: { id } }: any) {
    const [inputs, setInputs] = useState(['']);
    const [images, setImages] = useState<File[]>([]);
    const [prices, setPrices] = useState<number[]>([0]);
+   const [descriptions, setDescriptions] = useState(['']);
    const [parentProductName, setParentProductName] = useState('');
    const [tags, setTags] = useState(['']);
    const [selectedTag, setSelectedTag] = useState<any>('');
@@ -35,6 +36,8 @@ export default function page({ params: { id } }: any) {
          setInputs(productNames);
          const productPrices = dataProductResponse.product.map((element: any) => element.product_price);
          setPrices(productPrices);
+         const productDescription = dataProductResponse.product.map((element: any) => element.product_desc);
+         setDescriptions(productDescription);
          const oldProductId = dataProductResponse.product.map((element: any) => element.product_id);
          setOldProductId(oldProductId);
          const productImage = dataProductResponse.product.map((element: any) => element.image[0].image_location);
@@ -88,6 +91,12 @@ export default function page({ params: { id } }: any) {
       setInputs(newInputs);
    };
 
+   const handleDescriptionChange = (index: any, event: any) => {
+      const newDescriptions = [...descriptions];
+      newDescriptions[index] = event.target.value;
+      setDescriptions(newDescriptions);
+   };
+
    const handlePriceChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
       const newPrices = [...prices];
       newPrices[index] = parseFloat(event.target.value);
@@ -107,6 +116,7 @@ export default function page({ params: { id } }: any) {
       setInputs([...inputs, '']);
       setPrices([...prices, 0]);
       setImages([...images, new File([], '')]);
+      setDescriptions([...descriptions, '']);
    };
 
    const handleRemoveInput = (index: any) => {
@@ -129,6 +139,10 @@ export default function page({ params: { id } }: any) {
       const newOldImages = [...oldImages];
       newOldImages.splice(index, 1);
       setOldImages(newOldImages);
+
+      const newDescriptions = [...descriptions];
+      newDescriptions.splice(index, 1);
+      setDescriptions(newDescriptions);
    };
 
    const handleSubmit = async () => {
@@ -140,7 +154,8 @@ export default function page({ params: { id } }: any) {
             inputs: inputs.join(','),
             prices: prices.join(','),
             parentProductName: parentProductName,
-            selectedTag: selectedTag
+            selectedTag: selectedTag,
+            descriptions: descriptions.join(',')
          };
       }
       else {
@@ -148,7 +163,8 @@ export default function page({ params: { id } }: any) {
             inputs: inputs.join(','),
             prices: prices.join(','),
             parentProductName: parentProductName,
-            selectedTag: selectedTag
+            selectedTag: selectedTag,
+            descriptions: descriptions.join(',')
          };
       }
 
@@ -224,7 +240,10 @@ export default function page({ params: { id } }: any) {
                         <span className='em1_15 noSelect'> Product Price (Required) </span>
                         <input type="number" className='pad15 borrad5 boxedEl1' style={{ "outline": "none" }} onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
                      </div>
-
+                     <div className="flex verti gap15">
+                        <span className='em1_25 noSelect'> Product Descriptions </span>
+                        <textarea className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
+                     </div>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Image
                            {oldImages.length >= 1 && oldImages[index] ? (

@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 export default async function middleware(request: NextRequest) {
    let token = request.cookies.get('jwt')
    if (!token) {
-      if (!(request.nextUrl.pathname.startsWith('/auth'))) {
+      if (!(request.nextUrl.pathname.startsWith('/auth')) && !request.nextUrl.pathname.startsWith('/about')) {
          return NextResponse.rewrite(new URL('/auth/login', request.url))
       }
    }
