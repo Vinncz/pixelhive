@@ -9,6 +9,7 @@ export default function page() {
     const [inputs, setInputs] = useState(['']);
     const [images, setImages] = useState<File[]>([]);
     const [prices, setPrices] = useState<number[]>([0]);
+    const [descriptions, setDescriptions] = useState(['']);
     const [parentProductName, setParentProductName] = useState('');
     const [tags, setTags] = useState(['']);
     const [selectedTag, setSelectedTag] = useState<any>('');
@@ -37,6 +38,12 @@ export default function page() {
         setInputs(newInputs);
     };
 
+    const handleDescriptionChange = (index: any, event: any) => {
+        const newDescriptions = [...descriptions];
+        newDescriptions[index] = event.target.value;
+        setDescriptions(newDescriptions);
+    };
+
     const handlePriceChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const newPrices = [...prices];
         newPrices[index] = parseFloat(event.target.value);
@@ -56,6 +63,7 @@ export default function page() {
         setInputs([...inputs, '']);
         setPrices([...prices, 0]);
         setImages([...images, new File([], '')]);
+        setDescriptions([...descriptions, '']);
     };
 
     const handleRemoveInput = (index: any) => {
@@ -70,6 +78,10 @@ export default function page() {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
+
+        const newDescriptions = [...descriptions];
+        newDescriptions.splice(index, 1);
+        setDescriptions(newDescriptions);
     };
 
     const handleSubmit = async () => {
@@ -78,7 +90,8 @@ export default function page() {
             inputs: inputs.join(','),
             prices: prices.join(','),
             parentProductName: parentProductName,
-            selectedTag: selectedTag
+            selectedTag: selectedTag,
+            descriptions: descriptions.join(',')
         };
 
         formdata.append('data', JSON.stringify(combinedData));
@@ -121,6 +134,10 @@ export default function page() {
                         <div className="flex verti gap15">
                             <span className='em1_25 noSelect'> Product Price </span>
                             <input type="number" className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
+                        </div>
+                        <div className="flex verti gap15">
+                            <span className='em1_25 noSelect'> Product Descriptions </span>
+                            <textarea className='pad15 borrad5 nobor' style={{ "outline": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
                         </div>
                         <div className="flex verti gap15">
                             <span className='em1_25 noSelect'> Product Image </span>
