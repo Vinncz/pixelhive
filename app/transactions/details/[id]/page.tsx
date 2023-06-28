@@ -1,7 +1,10 @@
+import PageTitle from '@/app/components/PageTitle'
 import React from 'react'
 
 export default function page() {
     return (
-        <div>page</div>
+        <>
+            <PageTitle title='Transaction Details'/>
+        </>
     )
 }

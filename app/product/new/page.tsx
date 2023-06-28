@@ -2,12 +2,13 @@
 import PageTitle from '@/app/components/PageTitle'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { validate_name, validate_price, validate_desc, validate_aggregate_name, validate_file_presence } from '../functions/validation';
 
 export default function page() {
 
     const { push } = useRouter();
     const [inputs, setInputs] = useState(['']);
-    const [images, setImages] = useState<File[]>([]);
+    const [images, setImages] = useState<File[]>([new File([], '')]);
     const [prices, setPrices] = useState<number[]>([0]);
     const [descriptions, setDescriptions] = useState(['']);
     const [parentProductName, setParentProductName] = useState('');
@@ -86,6 +87,35 @@ export default function page() {
 
     const handleSubmit = async () => {
         var formdata = new FormData();
+
+        const name_validation_result = validate_name(inputs)
+        const price_validation_result = validate_price(prices)
+        const desc_validation_result = validate_desc(descriptions)
+        const aggregation_name_validation_result = validate_aggregate_name(parentProductName)
+        const file_validation_result = validate_file_presence(images)
+
+        if ( inputs.length > 1 ) {
+            if (!(name_validation_result[0] && price_validation_result[0] && desc_validation_result[0] && aggregation_name_validation_result[0] && file_validation_result[0])) {
+                console.log(aggregation_name_validation_result)
+                console.log(name_validation_result)
+                console.log(price_validation_result)
+                console.log(desc_validation_result)
+                console.log(file_validation_result)
+
+                return
+            }
+
+        } else {
+            if (!(name_validation_result[0] && price_validation_result[0] && desc_validation_result[0] && file_validation_result[0])) {
+                console.log(name_validation_result)
+                console.log(price_validation_result)
+                console.log(desc_validation_result)
+                console.log(file_validation_result)
+
+                return
+            }
+        }
+
         const combinedData = {
             inputs: inputs.join(','),
             prices: prices.join(','),
@@ -99,7 +129,7 @@ export default function page() {
             formdata.append('images[]', images[i]);
         }
 
-        console.log(JSON.stringify(combinedData))
+        // console.log(JSON.stringify(combinedData))
         const response = await fetch('http://localhost:8000/api/products/store-batch', {
             method: 'POST',
             body: formdata,
@@ -109,7 +139,6 @@ export default function page() {
             },
         });
 
-        const data = await response.json();
         if (response.ok) {
            push('/merchant')
         }
@@ -120,7 +149,7 @@ export default function page() {
 
          <div className="flex verti gap15 martom30">
             <span className='em1_25 noSelect'> Where Does Your Product Belong To? </span>
-            <select name="product" className='pad15 borrad5' id="prod" onChange={(e) => {
+            <select name="product" className='pad15 borrad5' style={{letterSpacing: "0.2px"}} id="prod" onChange={(e) => {
                setSelectedTag(e.target.value)
             }}>
                {tags.length > 0 ? (
@@ -136,7 +165,7 @@ export default function page() {
          {inputs.length > 1 ? (
             <div className="flex verti gap15 martom30">
                <span className='em1_25 noSelect'> What's the Name of this Aggregate? (Required) </span>
-               <input type="text" className='pad15 borrad5 boxedEl1' onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
+               <input type="text" className='pad15 borrad5 boxedEl1 code' style={{letterSpacing: "0.2px;"}} onChange={(event) => inputs.length > 1 ? setParentProductName(event.target.value) : setParentProductName('')} value={parentProductName} />
             </div>
          ) : null}
 
@@ -147,20 +176,20 @@ export default function page() {
                   <div className='gridH2 gap30'>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Name (Required) </span>
-                        <input type="text" className='pad15 borrad5 boxedEl1' onChange={(event) => handleInputChange(index, event)} value={input} />
+                        <input type="text" className='pad15 borrad5 boxedEl1 code' onChange={(event) => handleInputChange(index, event)} value={input} />
                      </div>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Price (Required) </span>
-                        <input type="number" className='pad15 borrad5 boxedEl1' onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
+                        <input type="number" className='pad15 borrad5 boxedEl1 code' onChange={(event) => handlePriceChange(index, event)} value={prices[index]} />
                      </div>
                      <div className="flex verti gap15">
                         <span className='em1_25 noSelect'> Product Description (Recommended) </span>
-                        <textarea className='pad15 borrad5 boxedEl1' style={{ "height": "200px", "resize": "vertical", "transition": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
+                        <textarea className='pad15 borrad5 boxedEl1 code' style={{ "height": "200px", "resize": "vertical", "transition": "none" }} onChange={(event) => handleDescriptionChange(index, event)} value={descriptions[index]} />
                      </div>
                      <div className="flex verti gap15">
                         <span className='em1_15 noSelect'> Product Image (Required)</span>
-                        <input type="file" className='pad15 borrad5 boxedEl1 ptr' style={{ "outline": "none", display: "none" }} onChange={(event) => handleImageChange(index, event)} id={"img" + index} />
-                        <label className='b ptr greenOutlineButton pad15 borrad10 flex centerHori' htmlFor={"img" + index}> Select Image </label>
+                        <input type="file" className='noSelect pad15 borrad5 boxedEl1 ptr' style={{ "outline": "none", display: "none" }} onChange={(event) => handleImageChange(index, event)} id={"img" + index} />
+                        <label className='noSelect b ptr greenOutlineButton pad15 borrad10 flex centerHori' htmlFor={"img" + index}> Select Image </label>
                         {images[index] && <span style={{"opacity": "50%"}} className='flex fullH fullW boxedEl1 pad25 noSelect centerHori centerVerti borrad15'>{images[index].name === 'empty' ? 'No new image selected' : images[index].name === '' || images[index].name === null ? 'No image selected' : images[index].name}</span>}
                      </div>
                   </div>
@@ -169,7 +198,7 @@ export default function page() {
                         <div className="flex verti gap5 martop30">
                            <span className='em1_5 b code noSelect martop30'> Dangerous Zone </span>
                            <span> Once taken, actions cannot be reverted. </span>
-                           <button className='pad15 borrad5 redOutlineButton ptr b martop15' onClick={() => handleRemoveInput(index)}>Remove</button>
+                           <button className='pad15 borrad5 redOutlineButton ptr b martop15 noSelect' onClick={() => handleRemoveInput(index)}>Remove</button>
                         </div>
                   ) : null}
                </div>
@@ -178,14 +207,14 @@ export default function page() {
 
          <div className='flex verti gap15 martop30'>
             <span className='b em1_25'> Do You Wish to Add a Variant of Your Item? </span>
-            <button onClick={handleAddInput} className='fullW orangeOutlineButton pad15 borrad5 ptr martop10 b'> Add Variant </button>
+            <button onClick={handleAddInput} className='fullW orangeOutlineButton pad15 borrad5 ptr martop10 b noSelect'> Add Variant </button>
          </div>
 
          <div className="flex verti gap15">
 
             <div className="flex gap15 fullW martom30">
-               <button className='fullW greenButton pad15 borrad5 ptr b martop15' onClick={() => handleSubmit()}> Update </button>
-               <button className='fullW redButton pad15 borrad5 ptr b martop15' onClick={() => {push("/merchant")}}> Cancel </button>
+               <button className='fullW greenButton pad15 borrad5 ptr b martop15 noSelect' onClick={() => handleSubmit()}> Add My Products! </button>
+               <button className='fullW redButton pad15 borrad5 ptr b martop15 noSelect' onClick={() => {push("/merchant")}}> Cancel </button>
             </div>
          </div>
       </>
