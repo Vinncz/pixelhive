@@ -1,5 +1,6 @@
+'use client'
 import FormatCurrency from '@/app/scripts/FormatCurrency'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import index_products_by_group from '@/lib/fetch/index/index_products_by_group'
 import Cookies from "js-cookie";
 
@@ -8,11 +9,24 @@ type Param = {
     current_product_id: number
 }
 
-export default async function ProductVariantItem({group_id, current_product_id}: Param) {
-    const data: Promise<ProductData[]> = await index_products_by_group(group_id, Cookies.get('jwt'))
-    const associatedProduct = await data
+export default function ProductVariantItem({ group_id, current_product_id }: Param) {
+    const [associatedProduct, setAssociatedProduct] = useState<ProductData[]>([]);
 
-    var classes = "ptr productVariantItem pad15 centerHori "
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data: Promise<ProductData[]> = index_products_by_group(group_id, Cookies.get('jwt'));
+                const associatedProduct = await data;
+                setAssociatedProduct(associatedProduct);
+            } catch (error) {
+                // Handle error
+            }
+        }
+
+        fetchData();
+    }, [group_id]);
+
+    var classes = "ptr flex verti productVariantItem pad15 centerHori fullH "
 
     const content = associatedProduct.map(item => {
         var thisclasses = classes
@@ -20,7 +34,7 @@ export default async function ProductVariantItem({group_id, current_product_id}:
             thisclasses += "selected"
 
         return (
-            <a href={'./' + item.product_id} className={thisclasses}>
+            <a href={'./' + item.product_id} className={thisclasses} key={item.product_id} >
                 <span className='flex fullW spaceBetweenH em_6 opacity_5'>
                     <span> Variant </span>
                     <span> Excl. VAT 11% </span>
@@ -30,8 +44,8 @@ export default async function ProductVariantItem({group_id, current_product_id}:
                     <span> {FormatCurrency(item.product_price)} </span>
                 </span>
             </a>
-        )
-    })
+        );
+    });
 
-    return content
+    return <div>{content}</div>;
 }

@@ -1,19 +1,77 @@
+'use client'
 import LoadingTemplate from '@/app/loaders/loading-template'
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import ProductVariantItem from './ProductVariantItem'
 import ProductImageSwiper from './ProductImageSwiper'
 
 type Param = {
-    product_data:any,
-    merchant_data:any,
+    product_data: any,
+    merchant_data: any,
 }
 
-export default function ProductPage({product_data, merchant_data}:Param) {
+export default function ProductPage({ product_data, merchant_data }: Param) {
+    const [bought, setBought] = useState(false);
+    const [isMerchant, setIsMerchant] = useState(false);
+    useEffect(() => {
+        const alreadyBought = async () => {
+            const response = await fetch('http://localhost:8000/api/transaction/bought', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'product_id': product_data.product_id
+                }),
+                credentials: 'include',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+            });
+            let already = await response.json();
+            setBought(already.data);
+        }
+
+        const theMerchant = async () => {
+            const response = await fetch('http://localhost:8000/api/transaction/valid-buyer', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'product_id': product_data.product_id
+                }),
+                credentials: 'include',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+            });
+            let m = await response.json();
+            setIsMerchant(m.data);
+        }
+        alreadyBought();
+        theMerchant();
+    }, [])
+
+    const handleCheckOut = async () => {
+        const response = await fetch('http://localhost:8000/api/transaction/buy', {
+            method: 'POST',
+            body: JSON.stringify({
+                'product_id': product_data.product_id
+            }),
+            credentials: 'include',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+
+        }
+        console.log(data);
+    }
     return (
         <div id="productPage" className="borrad5 fullW fullH">
 
-            <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                <ProductImageSwiper product_id={product_data.product_id}/>
+            <Suspense fallback={<LoadingTemplate msg='Fetching data..' />}>
+                <ProductImageSwiper product_id={product_data.product_id} />
             </Suspense>
 
             <div id="productBody" className='bortop1 fullH'>
@@ -22,7 +80,7 @@ export default function ProductPage({product_data, merchant_data}:Param) {
                         {product_data.product_name}
                     </div>
                     <div className='bortom1 pad15 padleft25 flex centerVerti gap15' id="merchant">
-                        <img className='boxedEl1 borradMAX' style={{maxWidth: 35 + 'px', maxHeight: 35 + 'px', aspectRatio: 1 / 1}} src={'http://localhost:8000/storage/' + merchant_data.merchant_image ?? ''} alt="" />
+                        <img className='boxedEl1 borradMAX' style={{ maxWidth: 35 + 'px', maxHeight: 35 + 'px', aspectRatio: 1 / 1 }} src={'http://localhost:8000/storage/' + merchant_data.merchant_image ?? ''} alt="" />
                         {merchant_data.merchant_name}
                     </div>
                     <div className='pad15 padleft25 flex fullH' id="productDescription">
@@ -31,10 +89,12 @@ export default function ProductPage({product_data, merchant_data}:Param) {
                 </div>
 
                 <div id="productActions" className='borleft1 pad25 gap10'>
-                    <button id="checkoutButton" className='ptr greenButton pad15 borrad5'> Checkout </button>
+                    {!bought || !isMerchant ? (
+                        <button id="checkoutButton" className='ptr greenButton pad15 borrad5' onClick={() => handleCheckOut()}> Checkout </button>
+                    ) : null}
                     <div id="productVariantSelector" className='borrad5 flex centerHori hideOverflow'>
-                        <Suspense fallback={<LoadingTemplate msg='Fetching data..'/>}>
-                            { /* @ts-expect-error Server Component */ }
+                        <Suspense fallback={<LoadingTemplate msg='Fetching data..' />}>
+                            { /* @ts-expect-error Server Component */}
                             <ProductVariantItem current_product_id={product_data.product_id} group_id={product_data.group_id} />
                         </Suspense>
                     </div>

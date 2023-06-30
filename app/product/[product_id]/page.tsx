@@ -1,5 +1,5 @@
-
-import React, { Suspense } from 'react'
+'use client'
+import React, { Suspense, useState, useEffect } from 'react'
 import LoadingProduct from '@/app/loaders/loading-product'
 import ProductPage from './components/ProductPage'
 import show_product from '@/lib/fetch/show/show_product'
@@ -12,20 +12,40 @@ type Params = {
     }
 }
 
-export default async function page ({params:{product_id}}: Params) {
-    const PROMISE_product_data: Promise<Product> = show_product(product_id, Cookies.get('jwt'))
-    const OBJECT_product_data = await PROMISE_product_data
+export default function Page({ params: { product_id } }: Params) {
+    const [productData, setProductData] = useState<Product | null>(null);
+    const [merchantData, setMerchantData] = useState<Merchant | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    const PROMISE_merchant_data: Promise<Merchant> = show_merchant(OBJECT_product_data.merchant_id.toString(), Cookies.get('jwt'));
-    const OBJECT_merchant_data = await PROMISE_merchant_data
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const productPromise: Promise<Product> = show_product(product_id, Cookies.get('jwt'));
+                const productData = await productPromise;
+                setProductData(productData);
 
-    const page = (
+                const merchantPromise: Promise<Merchant> = show_merchant(productData.merchant_id.toString(), Cookies.get('jwt'));
+                const merchantData = await merchantPromise;
+                setMerchantData(merchantData);
+
+                setLoading(false);
+            } catch (error) {
+                // Handle error
+            }
+        }
+
+        fetchData();
+    }, [product_id]);
+
+    if (loading) {
+        return <LoadingProduct />;
+    }
+
+    return (
         <>
-            <Suspense fallback={<LoadingProduct/>}>
-                <ProductPage product_data={OBJECT_product_data} merchant_data={OBJECT_merchant_data} />
+            <Suspense fallback={<LoadingProduct />}>
+                <ProductPage product_data={productData!} merchant_data={merchantData!} />
             </Suspense>
         </>
-    )
-
-    return page
+    );
 }
