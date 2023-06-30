@@ -19,7 +19,7 @@ export function validate_name (names:string[]) {
         error_msgs.push("")
     }
 
-    return [flag, error_msgs]
+    return [error_msgs]
 }
 
 export function validate_price (prices:number[]) {
@@ -43,7 +43,7 @@ export function validate_price (prices:number[]) {
         error_msgs.push("")
     }
 
-    return [flag, error_msgs]
+    return [error_msgs]
 }
 
 export function validate_desc (descs:string[]) {
@@ -65,7 +65,7 @@ export function validate_desc (descs:string[]) {
         error_msgs.push("")
     }
 
-    return [flag, error_msgs]
+    return [error_msgs]
 }
 
 export function validate_aggregate_name (name:string) {
@@ -80,7 +80,7 @@ export function validate_aggregate_name (name:string) {
         error_msgs.push("")
     }
 
-    return [flag, error_msgs]
+    return [error_msgs]
 }
 
 export function validate_file_presence (images:File[]) {
@@ -102,5 +102,5 @@ export function validate_file_presence (images:File[]) {
         error_msgs.push("Image thumbnail array cannot be empty.")
     }
 
-    return [flag, error_msgs];
+    return [error_msgs];
 }

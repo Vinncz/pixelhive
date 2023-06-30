@@ -8,8 +8,10 @@ export default function page({ params: { id } }: any) {
    const { push } = useRouter();
    const [oldProductId, setOldProductId] = useState(['']);
    const [oldImages, setOldImages] = useState(['']);
+   const [oldFiles, setOldFiles] = useState(['']);
    const [inputs, setInputs] = useState(['']);
    const [images, setImages] = useState<File[]>([]);
+   const [files, setFiles] = useState<File[]>([]);
    const [prices, setPrices] = useState<number[]>([0]);
    const [descriptions, setDescriptions] = useState(['']);
    const [parentProductName, setParentProductName] = useState('');
@@ -46,6 +48,13 @@ export default function page({ params: { id } }: any) {
          });
          console.log(images);
          setOldImages(productImage);
+
+         const productFile = dataProductResponse.product.map((element: any) => element.product_location);
+         productFile.forEach((element: any) => {
+            files.push(new File([], 'empty'));
+         });
+         console.log(files);
+         setOldFiles(productFile);
       };
 
       const getTags = async () => {
@@ -112,10 +121,20 @@ export default function page({ params: { id } }: any) {
       }
    };
 
+   const handleFileChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file) {
+         const newFiles = [...files];
+         newFiles[index] = file;
+         setFiles(newFiles);
+      }
+   };
+
    const handleAddInput = () => {
       setInputs([...inputs, '']);
       setPrices([...prices, 0]);
       setImages([...images, new File([], '')]);
+      setFiles([...images, new File([], '')]);
       setDescriptions([...descriptions, '']);
    };
 
@@ -131,6 +150,10 @@ export default function page({ params: { id } }: any) {
       const newImages = [...images];
       newImages.splice(index, 1);
       setImages(newImages);
+
+      const newFiles = [...files];
+      newFiles.splice(index, 1);
+      setFiles(newFiles);
 
       const newProductId = [...oldProductId];
       newProductId.splice(index, 1);
@@ -171,6 +194,10 @@ export default function page({ params: { id } }: any) {
       formdata.append('data', JSON.stringify(combinedData));
       for (let i = 0; i < images.length; i++) {
          formdata.append('images[]', images[i]);
+      }
+
+      for (let i = 0; i < files.length; i++) {
+         formdata.append('files[]', files[i]);
       }
 
       const response = await fetch('http://localhost:8000/api/products/update-batch/' + id, {
@@ -267,6 +294,24 @@ export default function page({ params: { id } }: any) {
                            ) : null}
                         </div>
                      ) : null}
+
+                     {oldFiles.length >= 1 ? (
+                        <div className="flex verti gap15">
+                           {oldFiles[index] ? (
+                              <>
+                                 <span className='em1_15 noSelect'> Previous Product </span>
+                                 <a className='fullW' target='_blank' href={"http://localhost:8000/storage/" + oldFiles[index]}  style={{"objectFit": "cover", "outline": "none"}}>{oldFiles[index]}</a>
+                              </>
+                           ) : null}
+                        </div>
+                     ) : null}
+                  </div>
+
+                  <div className="flex verti gap15 martop30">
+                     <span className='em1_15 noSelect'>Product (Required)</span>
+                     <input type="file" className='pad15 borrad5 boxedEl1 ptr' style={{ "outline": "none", display: "none" }} onChange={(event) => handleFileChange(index, event)} id={"product" + index} />
+                     <label className='b ptr greenOutlineButton pad15 borrad10 flex centerHori' htmlFor={"product" + index}>Select Product</label>
+                     {files[index] && <span style={{ "opacity": "50%" }} className='flex fullH fullW boxedEl1 pad25 noSelect centerHori centerVerti borrad15'>{files[index].name === 'empty' ? 'No new file selected' : files[index].name === '' || files[index].name === null ? 'No image selected' : files[index].name}</span>}
                   </div>
 
                   {inputs.length > 1 ? (
