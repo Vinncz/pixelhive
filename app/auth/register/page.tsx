@@ -4,6 +4,7 @@ import React, { FormEvent, useState, useEffect } from 'react'
 import cookie from 'cookie';
 
 export default function page() {
+    const { push } = useRouter();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('');
@@ -42,16 +43,7 @@ export default function page() {
 
         try {
             if (response.ok) {
-                setCookie('jwt', data.access_token, {
-                    maxAge: 3600,
-                    path: '/',
-                    sameSite: 'lax',
-                });
-
-                setError('');
-
-                window.location.href = '/';
-
+                push('/login');
             } else {
                 const msg = data.message
 
