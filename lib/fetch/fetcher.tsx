@@ -19,6 +19,7 @@ export default async function fetcher(scope: string, function_caller_name: strin
                 "Accept": "application/json",
                 "Authorization": `Bearer ${jwt}`
             },
+            cache: 'no-store'
         }).then(response => response.json()).then(datas => {
             console.log(JSON.stringify(datas) + '\n')
             return datas.data

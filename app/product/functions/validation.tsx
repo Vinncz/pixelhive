@@ -104,3 +104,25 @@ export function validate_file_presence (images:File[]) {
 
     return [error_msgs];
 }
+
+export function validate_product_presence (prod:File[]) {
+    let flag = true
+    let error_msgs = []
+
+    if (prod.length > 0) {
+        prod.forEach(p => {
+            if (p == null || p.name.trim().length <= 0 || p.size <= 0) {
+                error_msgs.push("Product is required.")
+                flag = false;
+            } else {
+                error_msgs.push("")
+            }
+        });
+
+    } else {
+        flag = false
+        error_msgs.push("Product cannot be empty.")
+    }
+
+    return [error_msgs];
+}

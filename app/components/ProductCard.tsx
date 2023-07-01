@@ -18,7 +18,7 @@ export default function ProductCard({image_src = "https://picsum.photos/200/200"
         <>
             <div className="product_card boxedEl1 borrad5 popupEl" onClick={() => push('/product/edit/' + productGroup)}>
                 <div className="image bortom1">
-                    <img decoding='async' src={image_src} alt="product_image" />
+                    <img style={{aspectRatio: "1/1", width: "100%", objectFit: "cover"}} decoding='async' src={image_src} alt="product_image" />
                 </div>
                 <div className="details">
                     <div className="product_name">
