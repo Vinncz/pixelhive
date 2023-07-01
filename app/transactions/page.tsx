@@ -24,8 +24,8 @@ export default function page() {
         <>
             <PageTitle title='Transaction List' />
             {transaction.length > 0 ? (
-                transaction.map(transaction =>
-                    <a href={"transactions/details/" + transaction.transaction_id}>transaction {transaction.transaction_id}</a>
+                transaction.map((transaction, index) =>
+                    <a className="greenOutlineButton borrad5 pad10" href={"transactions/details/" + transaction.transaction_id}>transaction #{index + 1}</a>
                 )) : null}
         </>
     )
