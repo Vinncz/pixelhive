@@ -135,14 +135,6 @@ export default function page() {
                             <span className="b em1_5"> {merchant.merchant_name} </span>
                         </div>
                     </div>
-                    <div className="flex fullW gap30 martop30">
-                        <div className="borradMAX hideOverflow" style={{ width: "fit-content", maxHeight: "125px" }}>
-                            <img src={'http://localhost:8000/storage/' + merchant.merchant_image} className='fullH fullW' style={{ objectFit: "cover", aspectRatio: "1/1" }} alt="" />
-                        </div>
-                        <div className="flex verti fullH centerHori gap5">
-                            <span className="b em1_5"> {merchant.merchant_name} </span>
-                        </div>
-                    </div>
 
                     <div className="flex hori fullW gap30">
                         <div className="flex verti gap15 fullW fullH">
