@@ -47,5 +47,5 @@ export default function ProductVariantItem({ group_id, current_product_id }: Par
         );
     });
 
-    return <div>{content}</div>;
+    return <div className='flex verti'>{content}</div>;
 }
