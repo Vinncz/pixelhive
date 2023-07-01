@@ -98,6 +98,13 @@ export default function NavBar() {
                 ) : (
                     <>
                         <span>
+                            <Link href='/transactions'>
+                                <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                                    My Transactions
+                                </div>
+                            </Link>
+                        </span>
+                        <span>
                             <Link href='/profile'>
                                 <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
                                     My Profile
