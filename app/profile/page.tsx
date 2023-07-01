@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import './profile_page.css'
 import PageTitle from '../components/PageTitle'
+import { useRouter } from 'next/navigation';
 
 export default function page() {
+    const { push } = useRouter();
     const [user, setUser] = useState<any>('');
     const [newUser, setNewUser] = useState<any>('');
     const [newPassword, setNewPassword] = useState<any>('');
@@ -125,6 +127,14 @@ export default function page() {
                 <div className="flex verti gap30 martop30 martom30 padtom30 bortom1">
                     <span className='em1_5 bortom1 padtom15 martop15'> Merchant Profile </span>
 
+                    <div className="flex fullW gap30 martop30">
+                        <div className="borradMAX hideOverflow" style={{ width: "fit-content", maxHeight: "125px" }}>
+                            <img src={'http://localhost:8000/storage/' + merchant.merchant_image} className='fullH fullW' style={{ objectFit: "cover", aspectRatio: "1/1" }} alt="" />
+                        </div>
+                        <div className="flex verti fullH centerHori gap5">
+                            <span className="b em1_5"> {merchant.merchant_name} </span>
+                        </div>
+                    </div>
                     <div className="flex fullW gap30 martop30">
                         <div className="borradMAX hideOverflow" style={{ width: "fit-content", maxHeight: "125px" }}>
                             <img src={'http://localhost:8000/storage/' + merchant.merchant_image} className='fullH fullW' style={{ objectFit: "cover", aspectRatio: "1/1" }} alt="" />
