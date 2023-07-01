@@ -24,6 +24,7 @@ export default function ProductPage({ product_data, merchant_data }: Param) {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
+                cache: 'no-store'
             });
             let already = await response.json();
             setBought(already.data);
@@ -40,6 +41,7 @@ export default function ProductPage({ product_data, merchant_data }: Param) {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
+                cache: 'no-store'
             });
             let m = await response.json();
             setIsOwner(m.data);
@@ -65,6 +67,7 @@ export default function ProductPage({ product_data, merchant_data }: Param) {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
+            cache: 'no-store'
         });
 
         const data = await response.json();

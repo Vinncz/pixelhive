@@ -98,6 +98,13 @@ export default function NavBar() {
                 ) : (
                     <>
                         <span>
+                            <Link href='/profile'>
+                                <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
+                                    My Profile
+                                </div>
+                            </Link>
+                        </span>
+                        <span>
                             <Link href='/merchant'>
                                 <div className="coloredEl pad10 padleft25 padri25 boxedEl1 borrad5">
                                     Merhant
