@@ -178,7 +178,7 @@ export default function page({ params: { id } }: any) {
             prices: prices.join(','),
             parentProductName: parentProductName,
             selectedTag: selectedTag,
-            descriptions: descriptions.join(',')
+            descriptions: descriptions.join('○')
          };
       }
       else {

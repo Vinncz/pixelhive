@@ -139,38 +139,6 @@ export default function page() {
       console.log(errorProdFile)
       console.log(errorParent)
 
-      let flag = 0;
-
-      name_validation_result.forEach(element => {
-         if (element != '') {
-            flag = 1
-         }
-      });
-      price_validation_result.forEach(element => {
-         if (element != '') {
-            flag = 1
-         }
-      });
-      desc_validation_result.forEach(element => {
-         if (element != '') {
-            flag = 1
-         }
-      });
-      file_validation_result.forEach(element => {
-         if (element != '') {
-            flag = 1
-         }
-      });
-      prod_validation_result.forEach(element => {
-         if (element != '') {
-            flag = 1
-         }
-      });
-
-      if (flag) {
-         return;
-      }
-
       var formdata = new FormData();
       const combinedData = {
          inputs: inputs.join(','),
@@ -295,7 +263,7 @@ export default function page() {
          <div className="flex verti gap15">
 
             <div className="flex gap15 fullW martom30">
-               <button className='fullW greenButton pad15 borrad5 ptr b martop15' onClick={() => handleSubmit()}> Update </button>
+               <button className='fullW greenButton pad15 borrad5 ptr b martop15' onClick={() => handleSubmit()}> Upload </button>
                <button className='fullW redButton pad15 borrad5 ptr b martop15' onClick={() => { push("/merchant") }}> Cancel </button>
             </div>
          </div>
